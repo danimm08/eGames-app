@@ -1,4 +1,4 @@
-package es.egames;
+package es.egames.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import es.egames.R;
 
 public class MainActivity extends AppCompatActivity {
 

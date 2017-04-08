@@ -1,4 +1,4 @@
-package es.egames;
+package es.egames.activities;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -25,11 +25,17 @@ import android.widget.Toast;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+
+import es.egames.R;
+import es.egames.utils.RestTemplateManager;
 
 /**
  * A login screen that offers login via userName/password.
@@ -226,7 +232,7 @@ public class LoginActivity extends AppCompatActivity {
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class LoginTask extends AsyncTask<Void, Void, String> {
+    public class LoginTask extends AsyncTask<Void, Void, Boolean> {
 
         private final String mUserName;
         private final String mPassword;
@@ -237,15 +243,15 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         @Override
-        protected String doInBackground(Void... params) {
+        protected Boolean doInBackground(Void... params) {
+            Boolean hasErrors = false;
             final String baseUrl = getString(R.string.ip_server) + "oauth/token";
             String pass = "eGamesApp:eGamesAppSecret";
             String encoded = new String(Base64.encode(pass.getBytes(), Base64.DEFAULT));
             encoded = encoded.replace("\n", "");
 
 
-            RestTemplate restTemplate = new RestTemplate();
-            restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+            RestTemplate restTemplate = RestTemplateManager.create();
             HttpHeaders headers = new HttpHeaders();
             headers.set("Authorization", "Basic " + encoded);
             HttpEntity httpEntity = new HttpEntity(headers);
@@ -259,36 +265,44 @@ public class LoginActivity extends AppCompatActivity {
             String url = baseUrl + "?username=" + mUserName + "&password=" + mPassword + "&grant_type=password";
             String access_token;
             try {
-                ResponseEntity<Map> request = restTemplate.exchange(url, HttpMethod.GET, httpEntity, Map.class);
-                Map<String, ?> entity = request.getBody();
+                ResponseEntity<Map> responseEntity = restTemplate.exchange(url, HttpMethod.GET, httpEntity, Map.class);
 
-                access_token = (String) entity.get("access_token");
+                if (responseEntity.getStatusCode().equals(HttpStatus.OK)) {
+                    Map<String, ?> entity = responseEntity.getBody();
+                    access_token = (String) entity.get("access_token");
+
+                    SharedPreferences sharedPref = getSharedPreferences(
+                            getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putString("access_token", access_token);
+                    editor.commit();
+                }
             } catch (Exception oops) {
-                access_token = "";
+                hasErrors = true;
             }
 
-            return access_token;
+            return hasErrors;
         }
 
         @Override
-        protected void onPostExecute(final String access_token) {
-            if (access_token != "") {
-                SharedPreferences sharedPref = getSharedPreferences(
-                        getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString("access_token", access_token);
-                editor.commit();
-
-
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                mAuthTask = null;
-                startActivity(intent);
+        protected void onPostExecute(final Boolean hasErrors) {
+            mAuthTask = null;
+            showProgress(false);
+            SharedPreferences sharedPref = getSharedPreferences(
+                    getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+            String access_token = sharedPref.getString("access_token", null);
+            if (!hasErrors) {
+                if (access_token != null) {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast toast = Toast.makeText(getApplicationContext(), R.string.error_invalid_credentials, Toast.LENGTH_LONG);
+                    toast.show();
+                }
             } else {
-                showProgress(false);
-                Toast toast = Toast.makeText(getApplicationContext(), R.string.error_invalid_credentials, Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(getApplicationContext(), R.string.error_general, Toast.LENGTH_LONG);
                 toast.show();
-                mAuthTask = null;
             }
         }
 
