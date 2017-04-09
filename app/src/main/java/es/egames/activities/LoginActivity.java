@@ -27,11 +27,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import es.egames.R;
@@ -57,8 +54,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         setTitle(R.string.title_activity_login);
-
-        checkIsLoggedIn();
         // Set up the login form.
         mUserNameView = (AutoCompleteTextView) findViewById(R.id.userName);
 
@@ -171,16 +166,6 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
         mAuthTask = null;
         startActivity(intent);
-    }
-
-    private void checkIsLoggedIn() {
-        SharedPreferences sharedPref = getSharedPreferences(
-                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        String access_token = sharedPref.getString("access_token", null);
-        if (access_token != null) {
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
-        }
     }
 
     /**

@@ -112,7 +112,7 @@
     <string name="surname">Surname</string>
     <string name="name">Name</string>
     <string name="personal_data">Personal data</string>
-    <string name="address" >Address</string>
+    <string name="address">Address</string>
     <string name="street">Street</string>
     <string name="city">City</string>
     <string name="state">State</string>
@@ -122,4 +122,9 @@
     <string name="email">Email</string>
     <string name="error_registration">There was an error with your registry, plase check that the field are correct.</string>
     <string name="error_general">An error has ocurred with the conection with the server</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="test">jfeiosjf fejisof jfeisojf</string>
 </resources>
