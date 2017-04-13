@@ -57,8 +57,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         setTitle(R.string.title_activity_login);
-
-        checkIsLoggedIn();
         // Set up the login form.
         mUserNameView = (AutoCompleteTextView) findViewById(R.id.userName);
 
@@ -122,7 +120,7 @@ public class LoginActivity extends AppCompatActivity {
         boolean cancel = false;
         View focusView = null;
 
-        // Check for a valid password.
+        // Check for game_default valid password.
         if (TextUtils.isEmpty(password)) {
             mPasswordView.setError(getString(R.string.error_field_required));
             focusView = mPasswordView;
@@ -133,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
             cancel = true;
         }
 
-        // Check for a valid username.
+        // Check for game_default valid username.
         if (TextUtils.isEmpty(username)) {
             mUserNameView.setError(getString(R.string.error_field_required));
             focusView = mUserNameView;
@@ -149,7 +147,7 @@ public class LoginActivity extends AppCompatActivity {
             // form field with an error.
             focusView.requestFocus();
         } else {
-            // Show a progress spinner, and kick off a background task to
+            // Show game_default progress spinner, and kick off game_default background task to
             // perform the user login attempt.
             showProgress(true);
             mAuthTask = new LoginTask(username, password);
@@ -171,16 +169,6 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
         mAuthTask = null;
         startActivity(intent);
-    }
-
-    private void checkIsLoggedIn() {
-        SharedPreferences sharedPref = getSharedPreferences(
-                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        String access_token = sharedPref.getString("access_token", null);
-        if (access_token != null) {
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
-        }
     }
 
     /**
@@ -256,7 +244,7 @@ public class LoginActivity extends AppCompatActivity {
             headers.set("Authorization", "Basic " + encoded);
             HttpEntity httpEntity = new HttpEntity(headers);
 
-            //TODO: Do this with a post request
+            //TODO: Do this with game_default post request
 //            Map<String, String> uriVariables = new HashMap<>();
 //            uriVariables.put("username", mUserName);
 //            uriVariables.put("password", mPassword);
