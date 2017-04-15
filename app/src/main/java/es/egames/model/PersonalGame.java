@@ -1,5 +1,7 @@
 package es.egames.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Set;
 
 /**
@@ -81,7 +83,6 @@ public class PersonalGame extends BaseEntity {
     }
 
     //Auxiliar relationship
-
     public Set<Image> getImages() {
         return images;
     }

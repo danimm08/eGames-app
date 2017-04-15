@@ -1,6 +1,8 @@
 package es.egames.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Created by daniel on 4/02/17.
  */
@@ -14,6 +16,10 @@ public class Image extends BaseEntity {
         super();
     }
 
+    public Image(String pathUrl) {
+        this.pathUrl = pathUrl;
+    }
+
     public String getPathUrl() {
         return pathUrl;
     }
@@ -22,11 +28,12 @@ public class Image extends BaseEntity {
         this.pathUrl = pathUrl;
     }
 
-    public PersonalGame getPersonalGame() {
-        return personalGame;
-    }
-
-    public void setPersonalGame(PersonalGame personalGame) {
-        this.personalGame = personalGame;
-    }
+//    @JsonIgnore
+//    public PersonalGame getPersonalGame() {
+//        return personalGame;
+//    }
+//
+//    public void setPersonalGame(PersonalGame personalGame) {
+//        this.personalGame = personalGame;
+//    }
 }

@@ -1,12 +1,14 @@
 package es.egames.forms;
 
+import java.io.Serializable;
+
 import es.egames.model.Game;
 import es.egames.model.Type;
 
 /**
  * Created by daniel on 30/03/17.
  */
-public class PersonalGameForm {
+public class PersonalGameForm  implements Serializable {
 
     private String description;
     private Type type;

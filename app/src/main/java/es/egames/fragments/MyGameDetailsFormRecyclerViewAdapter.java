@@ -82,7 +82,7 @@ public class MyGameDetailsFormRecyclerViewAdapter extends RecyclerView.Adapter<M
             super(view);
             mView = view;
             mImageView = (ImageView) view.findViewById(R.id.card_game_image);
-            mTitle = (TextView) view.findViewById(R.id.card_game_title);
+            mTitle = (TextView) view.findViewById(R.id.card_personalgame_username);
             mPlatform = (TextView) view.findViewById(R.id.card_game_platform);
         }
 
@@ -92,7 +92,7 @@ public class MyGameDetailsFormRecyclerViewAdapter extends RecyclerView.Adapter<M
         }
     }
 
-    public class RequestForImageTask extends AsyncTask<String, Void, Bitmap> {
+    public static class RequestForImageTask extends AsyncTask<String, Void, Bitmap> {
 
 
         public RequestForImageTask() {

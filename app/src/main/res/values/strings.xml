@@ -1,5 +1,5 @@
 <resources>
-    <string name="ip_server">http://192.168.1.38:8080/api/</string>
+    <string name="ip_server">http://192.168.1.33:8080/api/</string>
     <string name="app_name">eGames</string>
     <string name="title_activity_login">Sign in</string>
 
@@ -130,4 +130,7 @@
     <string name="recommended">Recommended</string>
     <string name="followed">Followed</string>
     <string name="games">Games</string>
+    <string name="title_activity_details_of_game">DetailsOfGameActivity</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="num_exchanges">Nº of exchanges</string>
 </resources>

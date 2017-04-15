@@ -1,5 +1,6 @@
 package es.egames.forms;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
@@ -12,7 +13,7 @@ import es.egames.model.User;
 /**
  * Created by daniel on 31/03/17.
  */
-public class DetailsOfExchangeForm {
+public class DetailsOfExchangeForm  implements Serializable {
     private Date creationDate;
     private Date lastUpdateDate;
     private Boolean status;

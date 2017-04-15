@@ -1,11 +1,13 @@
 package es.egames.forms;
 
+import java.io.Serializable;
+
 import es.egames.model.Address;
 
 /**
  * Created by daniel on 11/02/17.
  */
-public class RegistrationForm {
+public class RegistrationForm  implements Serializable {
 
     private String name;
     private String surname;

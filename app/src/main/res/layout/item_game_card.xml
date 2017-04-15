@@ -22,7 +22,7 @@
             android:scaleType="centerCrop" />
 
         <TextView
-            android:id="@+id/card_game_title"
+            android:id="@+id/card_personalgame_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/card_game_image"
@@ -38,8 +38,8 @@
             android:id="@+id/card_game_platform"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/card_game_title"
-            android:layout_below="@+id/card_game_title"
+            android:layout_alignStart="@+id/card_personalgame_username"
+            android:layout_below="@+id/card_personalgame_username"
             android:layout_marginStart="6dp" />
 
     </RelativeLayout>

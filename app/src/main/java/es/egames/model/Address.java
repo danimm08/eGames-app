@@ -1,9 +1,11 @@
 package es.egames.model;
 
+import java.io.Serializable;
+
 /**
  * Created by daniel on 4/02/17.
  */
-public class Address {
+public class Address implements Serializable{
 
     String street;
     String city;

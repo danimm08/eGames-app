@@ -1,11 +1,13 @@
 package es.egames.model;
 
+import java.io.Serializable;
+
 /**
  * Created by daniel on 2/02/17.
  */
 
 
-public abstract class BaseEntity {
+public abstract class BaseEntity  implements Serializable {
 
     public BaseEntity() {
 

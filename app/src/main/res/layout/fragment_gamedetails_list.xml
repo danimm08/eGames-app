@@ -3,11 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/list"
-    android:name="es.egames.fragments.PersonalGameFragment"
+    android:name="es.egames.fragments.DetailsOfGameActivityFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context="es.egames.fragments.GameDetailsFormList"
-    tools:listitem="@layout/item_game_card"/>
+    tools:context="es.egames.fragments.DetailsOfGameActivityFragment"
+    tools:listitem="@layout/item_personalgame_form" />
+

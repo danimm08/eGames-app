@@ -1,9 +1,11 @@
 package es.egames.forms;
 
+import java.io.Serializable;
+
 /**
  * Created by daniel on 30/03/17.
  */
-public class UserUserAccountForm {
+public class UserUserAccountForm  implements Serializable {
 
     private String username;
     private String password;

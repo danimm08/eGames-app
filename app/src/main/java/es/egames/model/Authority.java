@@ -1,5 +1,7 @@
 package es.egames.model;
 
+import java.io.Serializable;
+
 public class Authority extends BaseEntity{
 
     private String authority;

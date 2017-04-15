@@ -1,5 +1,6 @@
 package es.egames.forms;
 
+import java.io.Serializable;
 import java.util.List;
 
 import es.egames.model.Note;
@@ -9,7 +10,7 @@ import es.egames.model.Type;
 /**
  * Created by daniel on 9/03/17.
  */
-public class ExchangeForm {
+public class ExchangeForm  implements Serializable {
 
     private List<PersonalGame> personalGamesUser1;
     private List<PersonalGame> personalGamesUser2;

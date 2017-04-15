@@ -1,11 +1,13 @@
 package es.egames.forms;
 
+import java.io.Serializable;
+
 import es.egames.model.User;
 
 /**
  * Created by daniel on 1/04/17.
  */
-public class MessageForm {
+public class MessageForm  implements Serializable {
 
     private String text;
     private User recipient;

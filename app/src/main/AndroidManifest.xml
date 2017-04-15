@@ -28,6 +28,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activities.DetailsOfGameActivity"
+            android:label="@string/title_activity_details_of_game"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package es.egames.forms;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -13,7 +14,7 @@ import es.egames.model.Platform;
 /**
  * Created by daniel on 1/03/17.
  */
-public class GameDetailsForm {
+public class GameDetailsForm implements Serializable{
 
     private int id;
     private int version;

@@ -147,6 +147,9 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onListFragmentInteraction(GameDetailsForm gameDetailsForm) {
-        Toast.makeText(getApplicationContext(), gameDetailsForm.getTitle(), Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, DetailsOfGameActivity.class);
+        intent.putExtra("game", gameDetailsForm);
+        startActivity(intent);
+
     }
 }
