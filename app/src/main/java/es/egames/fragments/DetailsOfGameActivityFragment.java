@@ -1,17 +1,15 @@
 package es.egames.fragments;
 
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.google.android.gms.plus.model.people.Person;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -20,14 +18,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import es.egames.R;
 import es.egames.forms.GameDetailsForm;
-import es.egames.fragments.dummy.DummyContent;
-import es.egames.fragments.dummy.DummyContent.DummyItem;
 import es.egames.model.PersonalGame;
 import es.egames.utils.RestTemplateManager;
 
@@ -39,7 +34,7 @@ import es.egames.utils.RestTemplateManager;
  */
 public class DetailsOfGameActivityFragment extends Fragment {
 
-    private static final String ARG_COLUMN_COUNT = "column-count";
+    private static final String ORDERBY = "orderBy";
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
     private List<PersonalGame> personalGameList;
@@ -52,12 +47,10 @@ public class DetailsOfGameActivityFragment extends Fragment {
     public DetailsOfGameActivityFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
-    public static DetailsOfGameActivityFragment newInstance(int columnCount) {
+    public static DetailsOfGameActivityFragment newInstance(String orderBy) {
         DetailsOfGameActivityFragment fragment = new DetailsOfGameActivityFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
+        args.putString(ORDERBY, orderBy);
         fragment.setArguments(args);
         return fragment;
     }
@@ -67,10 +60,9 @@ public class DetailsOfGameActivityFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+            orderBy = getArguments().getString(ORDERBY);
         }
 
-        orderBy = "reputation";
         GameDetailsForm gameDetailsForm = (GameDetailsForm) getActivity().getIntent().getSerializableExtra("game");
         RequestForGameDetailsListTask requestForGameDetailsListTask = new RequestForGameDetailsListTask();
         try {
@@ -96,7 +88,8 @@ public class DetailsOfGameActivityFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyPersonalGameFormRecyclerViewAdapter(personalGameList, mListener));
+            boolean isDistance = orderBy.equals("distance");
+            recyclerView.setAdapter(new MyPersonalGameFormRecyclerViewAdapter(personalGameList, mListener, isDistance));
         }
         return view;
     }
@@ -145,6 +138,9 @@ public class DetailsOfGameActivityFragment extends Fragment {
             RestTemplate restTemplate = RestTemplateManager.create();
             HttpEntity headers = RestTemplateManager.authenticateRequest(getActivity());
             String url = RestTemplateManager.getUrl(getActivity(), "game/details?gameId=" + params[0] + "&orderBy=" + "reputation");
+            if (orderBy == null) {
+                orderBy = "reputation";
+            }
             switch (orderBy) {
                 case "reputation":
                     url = RestTemplateManager.getUrl(getActivity(), "game/details?gameId=" + params[0] + "&orderBy=" + "reputation");
@@ -152,8 +148,8 @@ public class DetailsOfGameActivityFragment extends Fragment {
                 case "type":
                     url = RestTemplateManager.getUrl(getActivity(), "game/details?gameId=" + params[0] + "&orderBy=" + "type");
                     break;
-                case "folowees":
-                    url = RestTemplateManager.getUrl(getActivity(), "game/details?gameId=" + params[0] + "&orderBy=" + "folowees");
+                case "followees":
+                    url = RestTemplateManager.getUrl(getActivity(), "game/details?gameId=" + params[0] + "&orderBy=" + "followees");
                     break;
                 case "distance":
                     url = RestTemplateManager.getUrl(getActivity(), "game/details?gameId=" + params[0] + "&orderBy=" + "distance");

@@ -17,10 +17,12 @@ public class MyPersonalGameFormRecyclerViewAdapter extends RecyclerView.Adapter<
 
     private final List<PersonalGame> mValues;
     private final OnListFragmentInteractionListener mListener;
+    private final boolean isDistance;
 
-    public MyPersonalGameFormRecyclerViewAdapter(List<PersonalGame> items, OnListFragmentInteractionListener listener) {
+    public MyPersonalGameFormRecyclerViewAdapter(List<PersonalGame> items, OnListFragmentInteractionListener listener, boolean isDistance) {
         mValues = items;
         mListener = listener;
+        this.isDistance = isDistance;
     }
 
     @Override
@@ -38,7 +40,14 @@ public class MyPersonalGameFormRecyclerViewAdapter extends RecyclerView.Adapter<
         Long rating = Math.round(auxRating);
         holder.mRatingbar.setRating(rating);
         holder.mType.setText(mValues.get(position).getType().toString());
-        holder.mNumber.setText(String.valueOf(mValues.get(position).getUser().getnExchanges()));
+        if(!isDistance){
+            holder.mNumberDescription.setText(R.string.num_exchanges);
+            holder.mNumber.setText(String.valueOf(mValues.get(position).getUser().getnExchanges()));
+        }else{
+            holder.mNumberDescription.setText(R.string.distance);
+            holder.mNumber.setText(String.valueOf(mValues.get(position).getDistance()) + " Km");
+        }
+
 
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +73,7 @@ public class MyPersonalGameFormRecyclerViewAdapter extends RecyclerView.Adapter<
         public final RatingBar mRatingbar;
         public final TextView mType;
         public final TextView mNumber;
+        public final TextView mNumberDescription;
         public PersonalGame mPersonalGame;
 
         public ViewHolder(View view) {
@@ -73,6 +83,7 @@ public class MyPersonalGameFormRecyclerViewAdapter extends RecyclerView.Adapter<
             mRatingbar = (RatingBar) view.findViewById(R.id.card_personalgame_ratingbar);
             mType = (TextView) view.findViewById(R.id.card_personalgame_type);
             mNumber = (TextView) view.findViewById(R.id.card_personalgame_number);
+            mNumberDescription = (TextView) view.findViewById(R.id.card_personalgame_numberDescription);
         }
 
         @Override

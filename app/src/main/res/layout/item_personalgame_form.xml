@@ -52,11 +52,12 @@
 
         <TextView
             android:id="@+id/card_personalgame_numberDescription"
-            android:layout_width="178dp"
+            android:layout_width="165dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/card_personalgame_username"
             android:layout_toEndOf="@+id/card_personalgame_type"
-            tools:text="@string/num_exchanges" />
+            android:paddingEnd="16dp"
+            android:textAlignment="viewEnd" />
 
         <TextView
             android:id="@+id/card_personalgame_number"
@@ -66,6 +67,7 @@
             android:layout_marginEnd="16dp"
 
             android:layout_toRightOf="@+id/card_personalgame_numberDescription"
+            android:text="5"
             android:textColor="@color/colorPrimary" />
 
     </RelativeLayout>

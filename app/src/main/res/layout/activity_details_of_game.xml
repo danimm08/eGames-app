@@ -69,17 +69,30 @@
 
                 <TextView
                     android:id="@+id/card_genres"
-                    android:layout_width="match_parent"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/card_personalgames_orderBy"
+                    android:layout_below="@+id/card_platform"
+                    android:layout_marginLeft="@dimen/md_keylines"
+                    android:layout_marginRight="@dimen/md_keylines"
+                    android:layout_marginTop="8dp"
+                    android:ellipsize="end"
+
+                    android:singleLine="true"
+                    android:textAlignment="viewStart"
+                    android:textSize="@dimen/article_subheading" />
+
+                <Spinner
+                    android:id="@+id/card_personalgames_orderBy"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:layout_below="@+id/card_platform"
                     android:layout_marginBottom="@dimen/md_keylines"
                     android:layout_marginLeft="@dimen/md_keylines"
                     android:layout_marginRight="@dimen/md_keylines"
                     android:layout_marginTop="8dp"
-                    android:ellipsize="end"
-                    android:singleLine="true"
-
-                    android:textSize="@dimen/article_subheading" />
+                    android:layout_toEndOf="@+id/card_genres" />
 
 
             </RelativeLayout>
@@ -87,19 +100,10 @@
 
         <include
             android:id="@+id/include"
-            layout="@layout/content_details_of_game"
+            layout="@layout/content_fragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
     </LinearLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
-
 
 </android.support.design.widget.CoordinatorLayout>
