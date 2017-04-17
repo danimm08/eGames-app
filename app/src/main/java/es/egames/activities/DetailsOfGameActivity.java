@@ -1,6 +1,8 @@
 package es.egames.activities;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +14,11 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+
+import java.net.MalformedURLException;
 
 import es.egames.R;
 import es.egames.forms.GameDetailsForm;
@@ -26,6 +33,7 @@ public class DetailsOfGameActivity extends AppCompatActivity implements DetailsO
     public TextView mPlatform;
     public TextView mGenres;
     public Spinner spinner;
+    public GameDetailsForm gameDetailsForm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +42,7 @@ public class DetailsOfGameActivity extends AppCompatActivity implements DetailsO
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        GameDetailsForm gameDetailsForm = (GameDetailsForm) getIntent().getSerializableExtra("game");
+        gameDetailsForm = (GameDetailsForm) getIntent().getSerializableExtra("game");
 
         setTitle(gameDetailsForm.getTitle());
 
@@ -67,11 +75,14 @@ public class DetailsOfGameActivity extends AppCompatActivity implements DetailsO
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
-
     }
 
     @Override
-    public void onListFragmentInteraction(PersonalGame item) {
+    public void onListFragmentInteraction(PersonalGame personalGame) {
+        Intent intent = new Intent(this,PersonalGameDetailsActivity.class);
+        intent.putExtra("game", gameDetailsForm);
+        intent.putExtra("personalgame", personalGame);
+        startActivity(intent);
 
     }
 

@@ -2,6 +2,7 @@ package es.egames.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -20,7 +21,7 @@ public class PersonalGame extends BaseEntity {
 
     private Game game;
     private User user;
-    private Set<Image> images;
+    private List<Image> images;
 
     public PersonalGame() {
         super();
@@ -83,11 +84,11 @@ public class PersonalGame extends BaseEntity {
     }
 
     //Auxiliar relationship
-    public Set<Image> getImages() {
+    public List<Image> getImages() {
         return images;
     }
 
-    public void setImages(Set<Image> images) {
+    public void setImages(List<Image> images) {
         this.images = images;
     }
 }
