@@ -2,8 +2,11 @@ package es.egames.activities;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,7 +14,6 @@ import es.egames.R;
 import es.egames.forms.GameDetailsForm;
 import es.egames.fragments.ImagePersonalGameFragment;
 import es.egames.fragments.MyGameDetailsFormRecyclerViewAdapter;
-import es.egames.model.Image;
 import es.egames.model.PersonalGame;
 
 public class PersonalGameDetailsActivity extends AppCompatActivity implements ImagePersonalGameFragment.OnListFragmentInteractionListener {
@@ -56,6 +58,15 @@ public class PersonalGameDetailsActivity extends AppCompatActivity implements Im
         mTitle.setText(gameDetailsForm.getTitle());
         mPlatform.setText(gameDetailsForm.getPlatform().getName());
         mGenres.setText(gameDetailsForm.getGenres().toString().replace("[", "").replace("]", ""));
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.make_exchange_button);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Launch Activity CreateExchange", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
 
     }
 

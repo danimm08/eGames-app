@@ -23,6 +23,8 @@ public class PersonalGameDetailsActivityFragment extends Fragment {
     public TextView mType;
     public TextView mNumber;
     public TextView mNumberDescription;
+    public TextView mDistanceDescription;
+    public TextView mDistanceNumber;
     public PersonalGame personalGame;
 
     public PersonalGameDetailsActivityFragment() {
@@ -45,6 +47,8 @@ public class PersonalGameDetailsActivityFragment extends Fragment {
         mType = (TextView) view.findViewById(R.id.card_personalgame_type);
         mNumber = (TextView) view.findViewById(R.id.card_personalgame_number);
         mNumberDescription = (TextView) view.findViewById(R.id.card_personalgame_numberDescription);
+        mDistanceDescription = (TextView) view.findViewById(R.id.card_personalgame_distanceDescription);
+        mDistanceNumber = (TextView) view.findViewById(R.id.card_personalgame_distanceNumber);
 
         mUsername.setText(personalGame.getUser().getUserAccount().getUsername());
         Double auxRating = (personalGame.getUser().getReputation() * 5) / 10;
@@ -52,12 +56,13 @@ public class PersonalGameDetailsActivityFragment extends Fragment {
         mRatingbar.setRating(rating);
         mDescription.setText(personalGame.getDescription());
         mType.setText(personalGame.getType().toString());
-
         mNumberDescription.setText(R.string.num_exchanges);
         mNumber.setText(String.valueOf(personalGame.getUser().getnExchanges()));
 
-//            mNumberDescription.setText(R.string.distance);
-//            mNumber.setText(String.valueOf(personalGame.getDistance()) + " Km");
+        if (personalGame.getDistance() != null) {
+            mDistanceDescription.setText(R.string.distance);
+            mDistanceNumber.setText(String.valueOf(personalGame.getDistance()) + " Km");
+        }
 
         return view;
     }
