@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import es.egames.R;
 import es.egames.forms.GameDetailsForm;
+import es.egames.widgets.MultiSelectionSpinner;
 import es.egames.fragments.DetailsOfGameActivityFragment;
 import es.egames.fragments.MyGameDetailsFormRecyclerViewAdapter;
 import es.egames.model.PersonalGame;
@@ -67,7 +68,6 @@ public class DetailsOfGameActivity extends AppCompatActivity implements DetailsO
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
-
     }
 
     @Override

@@ -69,6 +69,22 @@ public class RestTemplateManager {
         return httpEntity;
     }
 
+    public static HttpEntity authenticateRequestWithObject(Activity instance, Object object) {
+        HttpEntity httpEntity;
+        SharedPreferences sharedPref = instance.getSharedPreferences(
+                instance.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        String access_token = sharedPref.getString("access_token", null);
+
+        if (access_token != null) {
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Authorization", "Bearer " + access_token);
+            httpEntity = new HttpEntity(object,headers);
+        } else {
+            httpEntity = new HttpEntity(null);
+        }
+        return httpEntity;
+    }
+
     public static URLConnection getConnection(Activity instance, String auxUrl) {
         SharedPreferences sharedPref = instance.getSharedPreferences(
                 instance.getString(R.string.preference_file_key), Context.MODE_PRIVATE);

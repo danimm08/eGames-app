@@ -1,6 +1,7 @@
 package es.egames.forms;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import es.egames.model.Note;
@@ -20,6 +21,16 @@ public class ExchangeForm  implements Serializable {
 
     public ExchangeForm() {
         super();
+    }
+
+    public ExchangeForm(List<PersonalGame> personalGamesUser1, List<PersonalGame> personalGamesUser2, Type type, String wayExchange, Note note) {
+        this.personalGamesUser1 = personalGamesUser1;
+        this.personalGamesUser2 = personalGamesUser2;
+        this.type = type;
+        this.wayExchange = wayExchange;
+        List<Note> notes = new ArrayList<>();
+        notes.add(note);
+        this.notes = notes;
     }
 
     public List<PersonalGame> getPersonalGamesUser1() {

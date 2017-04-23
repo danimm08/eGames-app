@@ -140,4 +140,10 @@
     <string name="personal_games">Personal games</string>
     <string name="users">Users</string>
     <string name="ressults_of_search">Results for</string>
+    <string name="exchange_my_games" >My games</string>
+    <string name="exchange_their_games">Their games</string>
+    <string name="exchange_other_information">Other information</string>
+    <string name="exchange_way_exchange">Way to exchange</string>
+    <string name="exchange_make_exchange">Make exchange</string>
+    <string name="exchange_note">Add a note</string>
 </resources>

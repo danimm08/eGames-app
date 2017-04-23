@@ -6,4 +6,8 @@
         <item>Followees</item>
         <item>Distance</item>
     </string-array>
+    <string-array name="type">
+        <item>Fijo</item>
+        <item>Temporal</item>
+    </string-array>
 </resources>

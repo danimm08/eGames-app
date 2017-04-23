@@ -1,5 +1,6 @@
 package es.egames.activities;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -63,6 +64,9 @@ public class PersonalGameDetailsActivity extends AppCompatActivity implements Im
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),CreateExchangeActivity.class);
+                intent.putExtra("personalgame",personalGame);
+                startActivity(intent);
                 Snackbar.make(view, "Launch Activity CreateExchange", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
