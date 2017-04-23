@@ -2,7 +2,6 @@ package es.egames.activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -13,12 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
-
-import java.net.MalformedURLException;
 
 import es.egames.R;
 import es.egames.forms.GameDetailsForm;
@@ -63,7 +56,7 @@ public class DetailsOfGameActivity extends AppCompatActivity implements DetailsO
         if (bitmap != null) {
             mImageView.setImageBitmap(bitmap);
         } else {
-            mImageView.setImageResource(R.drawable.game_default);
+            mImageView.setImageResource(R.drawable.default_image);
         }
         mTitle.setText(gameDetailsForm.getTitle());
         mPlatform.setText(gameDetailsForm.getPlatform().getName());

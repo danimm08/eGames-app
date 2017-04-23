@@ -50,7 +50,7 @@ public class MyGameDetailsFormRecyclerViewAdapter extends RecyclerView.Adapter<M
         if (bitmap != null) {
             holder.mImageView.setImageBitmap(bitmap);
         } else {
-            holder.mImageView.setImageResource(R.drawable.game_default);
+            holder.mImageView.setImageResource(R.drawable.default_image);
         }
         holder.mTitle.setText(mValues.get(position).getTitle());
         holder.mPlatform.setText(mValues.get(position).getPlatform().getName());

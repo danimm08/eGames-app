@@ -53,7 +53,7 @@ public class PersonalGameDetailsActivity extends AppCompatActivity implements Im
         if (bitmap != null) {
             mImageView.setImageBitmap(bitmap);
         } else {
-            mImageView.setImageResource(R.drawable.game_default);
+            mImageView.setImageResource(R.drawable.default_image);
         }
         mTitle.setText(gameDetailsForm.getTitle());
         mPlatform.setText(gameDetailsForm.getPlatform().getName());

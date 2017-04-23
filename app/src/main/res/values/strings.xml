@@ -136,4 +136,8 @@
     <string name="distance">Distance</string>
     <string name="title_activity_personal_game_details">PersonalGameDetailsActivity</string>
     <string name="make_exchange">Exchange</string>
+    <string name="title_activity_search">SearchActivity</string>
+    <string name="personal_games">Personal games</string>
+    <string name="users">Users</string>
+    <string name="ressults_of_search">Results for</string>
 </resources>

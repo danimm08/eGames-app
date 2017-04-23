@@ -20,7 +20,6 @@ public class Game extends BaseEntity {
     private Platform platform;
     private Set<Genre> genres;
     private Set<GameMode> gameModes;
-    private Set<Keyword> keywords;
 
 
     public Game() {
@@ -109,12 +108,5 @@ public class Game extends BaseEntity {
         this.gameModes = gameModes;
     }
 
-    public Set<Keyword> getKeywords() {
-        return keywords;
-    }
-
-    public void setKeywords(Set<Keyword> keywords) {
-        this.keywords = keywords;
-    }
 
 }
