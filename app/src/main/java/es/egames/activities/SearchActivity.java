@@ -100,9 +100,10 @@ public class SearchActivity extends AppCompatActivity implements SoughtItemFragm
                 Toast.makeText(getApplicationContext(), R.string.error_general, Toast.LENGTH_LONG).show();
             }
         } else if (item.getObject() instanceof User) {
-
+            Intent intent = new Intent(this, UserDetailsActivity.class);
+            intent.putExtra("user", (User) item.getObject());
+            startActivity(intent);
         }
-        Toast.makeText(getApplicationContext(), "Clicado", Toast.LENGTH_LONG).show();
     }
 
     public class RequestForGameDetailsTask extends AsyncTask<Integer, Void, GameDetailsForm> {

@@ -4,16 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="es.egames.activities.PersonalGameDetailsActivity">
+    tools:context="es.egames.activities.UserDetailsActivity">
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none">
+        android:fillViewport="true"
+        android:isScrollContainer="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <android.support.design.widget.AppBarLayout
@@ -24,7 +26,7 @@
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="?attr/colorPrimary"
                     app:popupTheme="@style/AppTheme.PopupOverlay" />
 
@@ -45,79 +47,96 @@
 
                     <ImageView
                         android:id="@+id/user_image"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/card_image_height"
-                        android:scaleType="centerCrop" />
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/default_image" />
 
                     <TextView
                         android:id="@+id/user_name"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/card_title_height"
-                        android:layout_alignBottom="@+id/user_image"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/md_keylines"
+                        android:layout_marginTop="8dp"
+                        android:layout_toEndOf="@+id/user_image"
+                        android:text="Daniel Moreno"
                         android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                        android:textColor="@color/white" />
+                        android:textColor="@android:color/background_dark" />
 
                     <TextView
                         android:id="@+id/user_username"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/user_image"
+                        android:layout_below="@+id/user_name"
                         android:layout_marginBottom="8dp"
                         android:layout_marginLeft="@dimen/md_keylines"
                         android:layout_marginRight="@dimen/md_keylines"
                         android:layout_marginTop="@dimen/md_keylines"
+                        android:layout_toEndOf="@id/user_image"
                         android:ellipsize="end"
                         android:singleLine="true"
-
+                        android:text="danimm08"
                         android:textSize="@dimen/article_subheading" />
+
+
+                    <RatingBar
+                        android:id="@+id/user_rating"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/user_name"
+                        android:layout_marginBottom="@dimen/md_keylines"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginLeft="@dimen/md_keylines"
+                        android:layout_marginTop="@dimen/md_keylines"
+                        android:layout_toEndOf="@+id/user_username"
+                        android:numStars="5"
+                        android:rating="3" />
 
                     <TextView
                         android:id="@+id/user_exchanges"
-                        android:layout_width="200dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignBottom="@+id/card_personalgames_orderBy"
                         android:layout_below="@+id/user_username"
                         android:layout_marginLeft="@dimen/md_keylines"
                         android:layout_marginRight="@dimen/md_keylines"
                         android:layout_marginTop="8dp"
+                        android:layout_toEndOf="@id/user_image"
                         android:ellipsize="end"
 
                         android:singleLine="true"
+                        android:text="6 exchanges"
                         android:textAlignment="viewStart"
                         android:textSize="@dimen/article_subheading" />
 
+                    <Button
+                        android:id="@+id/user_action_button"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/user_rating"
+                        android:layout_toEndOf="@id/user_exchanges"
+                        android:minHeight="0dp"
+                        android:minWidth="0dp"
+                        android:text="Action"
+                        android:textColor="?attr/colorPrimary" />
 
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
 
             <include
-                layout="@layout/content_personal_game_details"
+                android:id="@+id/include"
+                layout="@layout/content_user_details"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent" />
 
-            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:foreground="?attr/selectableItemBackground">
-
-                <include
-                    layout="@layout/content_personal_game_details_images"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </android.support.v7.widget.CardView>
 
         </LinearLayout>
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/make_exchange_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_exchange_arrow_white_24dp" />
 </android.support.design.widget.CoordinatorLayout>
+
+

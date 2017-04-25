@@ -145,7 +145,7 @@ public class LoginActivity extends AppCompatActivity {
             focusView.requestFocus();
         } else {
             // Show game_default progress spinner, and kick off game_default background task to
-            // perform the user login attempt.
+            // perform the auxUser login attempt.
             showProgress(true);
             mAuthTask = new LoginTask(username, password);
             mAuthTask.execute((Void) null);
@@ -215,7 +215,7 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * Represents an asynchronous login/registration task used to authenticate
-     * the user.
+     * the auxUser.
      */
     public class LoginTask extends AsyncTask<Void, Void, Boolean> {
 

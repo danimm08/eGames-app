@@ -42,7 +42,7 @@ public class PersonalGameDetailsActivityFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_personal_game_details, container, false);
 
         mUsername = (TextView) view.findViewById(R.id.card_personalgame_username);
-        mRatingbar = (RatingBar) view.findViewById(R.id.card_personalgame_ratingbar);
+        mRatingbar = (RatingBar) view.findViewById(R.id.user_rating);
         mDescription = (TextView) view.findViewById(R.id.card_personalgame_description);
         mType = (TextView) view.findViewById(R.id.card_personalgame_type);
         mNumber = (TextView) view.findViewById(R.id.card_personalgame_number);
