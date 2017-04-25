@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import es.egames.R;
 import es.egames.forms.GameDetailsForm;
-import es.egames.widgets.MultiSelectionSpinner;
 import es.egames.fragments.DetailsOfGameActivityFragment;
 import es.egames.fragments.MyGameDetailsFormRecyclerViewAdapter;
 import es.egames.model.PersonalGame;
@@ -40,10 +39,10 @@ public class DetailsOfGameActivity extends AppCompatActivity implements DetailsO
 
         setTitle(gameDetailsForm.getTitle());
 
-        mImageView = (ImageView) findViewById(R.id.card_image);
-        mTitle = (TextView) findViewById(R.id.card_title);
-        mPlatform = (TextView) findViewById(R.id.card_platform);
-        mGenres = (TextView) findViewById(R.id.card_genres);
+        mImageView = (ImageView) findViewById(R.id.user_image);
+        mTitle = (TextView) findViewById(R.id.user_name);
+        mPlatform = (TextView) findViewById(R.id.user_username);
+        mGenres = (TextView) findViewById(R.id.user_exchanges);
         spinner = (Spinner) findViewById(R.id.card_personalgames_orderBy);
 
         MyGameDetailsFormRecyclerViewAdapter.RequestForImageTask task = new MyGameDetailsFormRecyclerViewAdapter.RequestForImageTask();

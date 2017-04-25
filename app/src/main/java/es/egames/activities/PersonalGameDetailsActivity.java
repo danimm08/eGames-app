@@ -38,10 +38,10 @@ public class PersonalGameDetailsActivity extends AppCompatActivity implements Im
 
         setTitle(gameDetailsForm.getTitle());
 
-        mImageView = (ImageView) findViewById(R.id.card_image);
-        mTitle = (TextView) findViewById(R.id.card_title);
-        mPlatform = (TextView) findViewById(R.id.card_platform);
-        mGenres = (TextView) findViewById(R.id.card_genres);
+        mImageView = (ImageView) findViewById(R.id.user_image);
+        mTitle = (TextView) findViewById(R.id.user_name);
+        mPlatform = (TextView) findViewById(R.id.user_username);
+        mGenres = (TextView) findViewById(R.id.user_exchanges);
 
         MyGameDetailsFormRecyclerViewAdapter.RequestForImageTask task = new MyGameDetailsFormRecyclerViewAdapter.RequestForImageTask();
         Bitmap bitmap;

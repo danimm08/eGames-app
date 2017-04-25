@@ -80,7 +80,7 @@ public class MyPersonalGameFormRecyclerViewAdapter extends RecyclerView.Adapter<
             super(view);
             mView = view;
             mUsername = (TextView) view.findViewById(R.id.card_personalgame_username);
-            mRatingbar = (RatingBar) view.findViewById(R.id.card_personalgame_ratingbar);
+            mRatingbar = (RatingBar) view.findViewById(R.id.user_rating);
             mType = (TextView) view.findViewById(R.id.card_personalgame_type);
             mNumber = (TextView) view.findViewById(R.id.card_personalgame_number);
             mNumberDescription = (TextView) view.findViewById(R.id.card_personalgame_numberDescription);

@@ -39,25 +39,25 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/card_image"
+                    android:id="@+id/user_image"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/card_image_height"
                     android:scaleType="centerCrop" />
 
                 <TextView
-                    android:id="@+id/card_title"
+                    android:id="@+id/user_name"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/card_title_height"
-                    android:layout_alignBottom="@+id/card_image"
+                    android:layout_alignBottom="@+id/user_image"
                     android:layout_marginLeft="@dimen/md_keylines"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
                     android:textColor="@color/white" />
 
                 <TextView
-                    android:id="@+id/card_platform"
+                    android:id="@+id/user_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/card_image"
+                    android:layout_below="@+id/user_image"
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="@dimen/md_keylines"
                     android:layout_marginRight="@dimen/md_keylines"
@@ -68,11 +68,11 @@
                     android:textSize="@dimen/article_subheading" />
 
                 <TextView
-                    android:id="@+id/card_genres"
+                    android:id="@+id/user_exchanges"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/card_personalgames_orderBy"
-                    android:layout_below="@+id/card_platform"
+                    android:layout_below="@+id/user_username"
                     android:layout_marginLeft="@dimen/md_keylines"
                     android:layout_marginRight="@dimen/md_keylines"
                     android:layout_marginTop="8dp"
@@ -87,12 +87,12 @@
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_below="@+id/card_platform"
+                    android:layout_below="@+id/user_username"
                     android:layout_marginBottom="@dimen/md_keylines"
                     android:layout_marginLeft="@dimen/md_keylines"
                     android:layout_marginRight="@dimen/md_keylines"
                     android:layout_marginTop="8dp"
-                    android:layout_toEndOf="@+id/card_genres" />
+                    android:layout_toEndOf="@+id/user_exchanges" />
 
             </RelativeLayout>
         </android.support.v7.widget.CardView>

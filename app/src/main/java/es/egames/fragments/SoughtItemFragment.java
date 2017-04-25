@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.plus.model.people.Person;
+
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -43,10 +45,10 @@ import java.util.concurrent.ExecutionException;
 public class SoughtItemFragment extends Fragment {
 
     private static final String MODE = "mode";
-    private static final String TOSEARCH = "toSearch";
+    private static final String AUXOBJECT = "auxObject";
     private int mColumnCount = 1;
     private String mode;
-    private String toSearch;
+    private Object auxObject;
     private List<SoughtItem> items;
     private OnListFragmentInteractionListener mListener;
 
@@ -57,11 +59,14 @@ public class SoughtItemFragment extends Fragment {
     public SoughtItemFragment() {
     }
 
-    public static SoughtItemFragment newInstance(String mode, String toSearch) {
+    public static SoughtItemFragment newInstance(String mode, Object auxObject) {
         SoughtItemFragment fragment = new SoughtItemFragment();
         Bundle args = new Bundle();
         args.putString(MODE, mode);
-        args.putString(TOSEARCH, toSearch);
+        if (auxObject instanceof String)
+            args.putString(AUXOBJECT, (String) auxObject);
+        if (auxObject instanceof User)
+            args.putSerializable(AUXOBJECT, (User) auxObject);
         fragment.setArguments(args);
         return fragment;
     }
@@ -72,7 +77,10 @@ public class SoughtItemFragment extends Fragment {
 
         if (getArguments() != null) {
             mode = getArguments().getString(MODE);
-            toSearch = getArguments().getString(TOSEARCH);
+            auxObject = getArguments().getString(AUXOBJECT);
+            if(auxObject==null){
+                auxObject = getArguments().getSerializable(AUXOBJECT);
+            }
         }
 
         RequestForSearchTask task = new RequestForSearchTask();
@@ -147,6 +155,8 @@ public class SoughtItemFragment extends Fragment {
             RestTemplate restTemplate = RestTemplateManager.create();
             HttpEntity headers = RestTemplateManager.authenticateRequest(getActivity());
             String url;
+            String toSearch = auxObject instanceof String ? (String) auxObject : null;
+            User user = auxObject instanceof User ? (User) auxObject : null;
             switch (mode) {
                 case "user":
                     url = RestTemplateManager.getUrl(getActivity(), "user/search?toSearch=" + toSearch);
@@ -213,7 +223,61 @@ public class SoughtItemFragment extends Fragment {
                             }
                             soughtItemList.add(i);
                         }
-
+                    }
+                    break;
+                case "personalgames":
+                    url = RestTemplateManager.getUrl(getActivity(), "personalgame/list?userId=" + user.getId());
+                    ResponseEntity<PersonalGame[]> responseEntity4;
+                    responseEntity4 = restTemplate.exchange(url, HttpMethod.GET, headers, PersonalGame[].class);
+                    if (responseEntity4.getStatusCode().equals(HttpStatus.OK)) {
+                        List<PersonalGame> aux = Arrays.asList(responseEntity4.getBody());
+                        for (PersonalGame pg : aux) {
+                            SoughtItem i = SoughtItem.createFromGame(pg.getGame());
+                            Bitmap bmp;
+                            try {
+                                URL auxUrl = new URL("http:" + pg.getGame().getCoverUrl());
+                                bmp = BitmapFactory.decodeStream(auxUrl.openConnection().getInputStream());
+                                i.setImage(bmp);
+                            } catch (Exception e) {
+                                bmp = null;
+                                i.setImage(bmp);
+                            }
+                            soughtItemList.add(i);
+                        }
+                    }
+                    break;
+                case "followers":
+                    List<User> aux = new ArrayList<>(user.getFollowers());
+                    for (User u : aux) {
+                        SoughtItem i = SoughtItem.createFromUser(u);
+                        Bitmap bmp;
+                        try {
+                            String auxUrl = RestTemplateManager.getUrl(getActivity(), "image/download?filename=" + URLEncoder.encode(u.getProfilePicture(), "UTF-8").toString());
+                            URLConnection connection = RestTemplateManager.getConnection(getActivity(), auxUrl);
+                            bmp = BitmapFactory.decodeStream(connection.getInputStream());
+                            i.setImage(bmp);
+                        } catch (Exception e) {
+                            bmp = null;
+                            i.setImage(bmp);
+                        }
+                        soughtItemList.add(i);
+                    }
+                    break;
+                case "followees":
+                    List<User> aux2 = new ArrayList<>(user.getFollowees());
+                    for (User u : aux2) {
+                        SoughtItem i = SoughtItem.createFromUser(u);
+                        Bitmap bmp;
+                        try {
+                            String auxUrl = RestTemplateManager.getUrl(getActivity(), "image/download?filename=" + URLEncoder.encode(u.getProfilePicture(), "UTF-8").toString());
+                            URLConnection connection = RestTemplateManager.getConnection(getActivity(), auxUrl);
+                            bmp = BitmapFactory.decodeStream(connection.getInputStream());
+                            i.setImage(bmp);
+                        } catch (Exception e) {
+                            bmp = null;
+                            i.setImage(bmp);
+                        }
+                        soughtItemList.add(i);
                     }
                     break;
             }
