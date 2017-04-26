@@ -44,6 +44,10 @@
         <activity
             android:name=".activities.UserDetailsActivity"
             android:label="@string/title_activity_user_details"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.ExchangeDetailsActivity"
+            android:label="@string/title_activity_exchange_details"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

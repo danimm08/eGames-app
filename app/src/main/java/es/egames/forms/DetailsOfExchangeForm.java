@@ -2,9 +2,11 @@ package es.egames.forms;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import es.egames.model.Exchange;
+import es.egames.model.Note;
 import es.egames.model.PersonalGame;
 import es.egames.model.Type;
 import es.egames.model.User;
@@ -13,7 +15,7 @@ import es.egames.model.User;
 /**
  * Created by daniel on 31/03/17.
  */
-public class DetailsOfExchangeForm  implements Serializable {
+public class DetailsOfExchangeForm implements Serializable {
     private Date creationDate;
     private Date lastUpdateDate;
     private Boolean status;
@@ -23,13 +25,15 @@ public class DetailsOfExchangeForm  implements Serializable {
     private String wayExchange;
 
     private User user;
+    private User lastModifier;
     private Set<PersonalGame> personalGameUser1;
     private Set<PersonalGame> personalGameUser2;
+    private List<Note> notes;
 
     public DetailsOfExchangeForm() {
     }
 
-    public DetailsOfExchangeForm(Exchange exchange, Set<PersonalGame> personalGameUser1, Set<PersonalGame> personalGameUser2) {
+    public DetailsOfExchangeForm(Exchange exchange, Set<PersonalGame> personalGameUser1, Set<PersonalGame> personalGameUser2, List<Note> notes) {
         this.creationDate = exchange.getCreationDate();
         this.lastUpdateDate = exchange.getLastUpdateDate();
         this.status = exchange.getStatus();
@@ -38,8 +42,10 @@ public class DetailsOfExchangeForm  implements Serializable {
         this.type = exchange.getType();
         this.wayExchange = exchange.getWayExchange();
         this.user = exchange.getUser();
+        this.lastModifier = exchange.getLastModifier();
         this.personalGameUser1 = personalGameUser1;
         this.personalGameUser2 = personalGameUser2;
+        this.notes = notes;
     }
 
     public Date getCreationDate() {
@@ -106,6 +112,14 @@ public class DetailsOfExchangeForm  implements Serializable {
         this.user = user;
     }
 
+    public User getLastModifier() {
+        return lastModifier;
+    }
+
+    public void setLastModifier(User lastModifier) {
+        this.lastModifier = lastModifier;
+    }
+
     public Set<PersonalGame> getPersonalGameUser1() {
         return personalGameUser1;
     }
@@ -120,5 +134,13 @@ public class DetailsOfExchangeForm  implements Serializable {
 
     public void setPersonalGameUser2(Set<PersonalGame> personalGameUser2) {
         this.personalGameUser2 = personalGameUser2;
+    }
+
+    public List<Note> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<Note> notes) {
+        this.notes = notes;
     }
 }

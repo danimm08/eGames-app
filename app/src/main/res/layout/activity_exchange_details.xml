@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="es.egames.activities.ExchangeDetailsActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:descendantFocusability="blocksDescendants">
+
+            <android.support.design.widget.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/AppTheme.AppBarOverlay">
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="?attr/colorPrimary"
+                    app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+            </android.support.design.widget.AppBarLayout>
+
+            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/card_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:foreground="?attr/selectableItemBackground">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/exchange_created_on_message"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginLeft="@dimen/md_keylines"
+                        android:layout_marginRight="@dimen/md_keylines"
+                        android:layout_marginTop="@dimen/md_keylines"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:text="@string/create_on"
+                        android:textSize="@dimen/article_subheading" />
+
+                    <TextView
+                        android:id="@+id/exchange_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/md_keylines"
+                        android:layout_marginTop="@dimen/md_keylines"
+                        android:layout_toEndOf="@id/exchange_created_on_message"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:text="22/02/2017"
+                        android:textAlignment="viewStart"
+                        android:textSize="@dimen/article_subheading" />
+
+                    <TextView
+                        android:id="@+id/exchange_update_on_message"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/exchange_created_on_message"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginLeft="@dimen/md_keylines"
+                        android:layout_marginRight="@dimen/md_keylines"
+                        android:layout_marginTop="0dp"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:text="@string/update_on"
+                        android:textSize="@dimen/article_subheading" />
+
+                    <TextView
+                        android:id="@+id/exchange_update"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/exchange_created_on_message"
+                        android:layout_marginRight="@dimen/md_keylines"
+                        android:layout_toEndOf="@id/exchange_created_on_message"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:text="22/02/2017"
+                        android:textAlignment="viewStart"
+                        android:textSize="@dimen/article_subheading" />
+
+                    <Button
+                        android:id="@+id/exchange_state"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/exchange_update_on_message"
+                        android:layout_marginLeft="6dp"
+                        android:minHeight="0dp"
+                        android:minWidth="0dp"
+                        android:text="Pending"
+                        android:textColor="@android:color/holo_orange_dark" />
+
+                    <TextView
+                        android:id="@+id/exchange_event"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/exchange_update"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="@dimen/md_keylines"
+                        android:layout_marginTop="@dimen/md_keylines"
+                        android:layout_toEndOf="@id/exchange_created_on_message"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:textAlignment="viewStart"
+                        android:textSize="@dimen/article_subheading" />
+
+                    <TextView
+                        android:id="@+id/exchange_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/exchange_state"
+                        android:layout_marginLeft="@dimen/md_keylines"
+                        android:layout_marginRight="@dimen/md_keylines"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:text="@string/update_on"
+                        android:textSize="@dimen/article_subheading"
+                        tools:text="6" />
+
+                    <TextView
+                        android:id="@+id/exchange_num_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/exchange_event"
+                        android:layout_marginRight="@dimen/md_keylines"
+                        android:layout_toEndOf="@id/exchange_num"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:text="@string/attemps"
+                        android:textAlignment="viewStart"
+                        android:textSize="@dimen/article_subheading" />
+
+
+                    <TextView
+                        android:id="@+id/exchange_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/exchange_num_description"
+                        android:layout_marginLeft="@dimen/md_keylines"
+                        android:layout_below="@+id/exchange_event"
+                        android:layout_marginRight="@dimen/md_keylines"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:text="Fijo"
+                        android:textAlignment="viewStart"
+                        android:textSize="@dimen/article_subheading" />
+
+                    <TextView
+                        android:id="@+id/exchange_way_exchange"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/exchange_num"
+                        android:layout_marginBottom="@dimen/md_keylines"
+                        android:layout_marginLeft="@dimen/md_keylines"
+                        android:layout_marginRight="@dimen/md_keylines"
+                        android:layout_marginTop="@dimen/md_keylines"
+                        android:ellipsize="end"
+                        android:singleLine="false"
+                        android:text="@string/update_on"
+                        android:textSize="@dimen/article_subheading"
+                        tools:text="Nos vemos en plaza de Armas" />
+
+
+                    <Button
+                        android:id="@+id/exchange_accept"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/exchange_way_exchange"
+                        android:layout_marginLeft="6dp"
+                        android:minHeight="0dp"
+                        android:minWidth="0dp"
+                        android:paddingBottom="@dimen/md_keylines"
+                        android:text="@string/accept"
+                        android:textColor="@android:color/holo_green_dark" />
+
+                    <Button
+                        android:id="@+id/exchange_denny"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/exchange_way_exchange"
+                        android:layout_marginLeft="6dp"
+                        android:layout_toEndOf="@id/exchange_accept"
+                        android:minHeight="0dp"
+                        android:minWidth="0dp"
+                        android:text="@string/denny"
+                        android:textColor="@color/holo_red_dark" />
+
+                    <Button
+                        android:id="@+id/exchange_negotiate"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_below="@id/exchange_way_exchange"
+                        android:layout_marginEnd="50dp"
+                        android:minHeight="0dp"
+                        android:minWidth="0dp"
+                        android:text="@string/negotiate"
+                        android:textColor="@android:color/holo_orange_dark" />
+
+
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:id="@+id/exchange_notes"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/cardview_light_background"
+                android:paddingBottom="16dp"
+                android:paddingLeft="16dp"
+                android:paddingTop="16dp"
+                android:text="@string/notes"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:visibility="visible" />
+
+            <include
+                layout="@layout/content_exchange_details_notes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
+                android:id="@+id/exchange_my_games"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/cardview_light_background"
+                android:paddingBottom="16dp"
+                android:paddingLeft="16dp"
+                android:paddingTop="16dp"
+                android:text="@string/exchange_my_games"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:visibility="visible" />
+
+            <include
+                layout="@layout/content_exchange_details_my_games"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/exchange_their_games"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/cardview_light_background"
+                android:paddingBottom="16dp"
+                android:paddingLeft="16dp"
+                android:paddingTop="16dp"
+                android:text="@string/exchange_their_games"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:visibility="visible" />
+
+            <include
+                layout="@layout/content_exchange_details_their_games"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!--<include-->
+                <!--layout="@layout/content_exchange_details_notes"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/exchange_their_games"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginLeft="16dp"-->
+                <!--android:background="@color/cardview_light_background"-->
+                <!--android:text="@string/exchange_their_games"-->
+                <!--android:textAppearance="@style/TextAppearance.AppCompat.Headline"-->
+                <!--android:visibility="visible" />-->
+
+            <!--<include-->
+                <!--layout="@layout/content_exchange_details_notes"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+
+
+        </LinearLayout>
+    </ScrollView>
+</android.support.design.widget.CoordinatorLayout>

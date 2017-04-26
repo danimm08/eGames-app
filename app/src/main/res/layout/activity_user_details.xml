@@ -66,7 +66,7 @@
                         android:textColor="@android:color/background_dark" />
 
                     <TextView
-                        android:id="@+id/user_username"
+                        android:id="@+id/exchange_created_on_message"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/user_name"
@@ -91,7 +91,7 @@
                         android:layout_marginEnd="16dp"
                         android:layout_marginLeft="@dimen/md_keylines"
                         android:layout_marginTop="@dimen/md_keylines"
-                        android:layout_toEndOf="@+id/user_username"
+                        android:layout_toEndOf="@+id/exchange_created_on_message"
                         android:numStars="5"
                         android:rating="3" />
 
@@ -100,7 +100,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignBottom="@+id/card_personalgames_orderBy"
-                        android:layout_below="@+id/user_username"
+                        android:layout_below="@+id/exchange_created_on_message"
                         android:layout_marginLeft="@dimen/md_keylines"
                         android:layout_marginRight="@dimen/md_keylines"
                         android:layout_marginTop="8dp"

@@ -53,10 +53,9 @@ public class RestTemplateManager {
         return restTemplate;
     }
 
-    public static HttpEntity authenticateRequest(Activity instance) {
+    public static HttpEntity authenticateRequest(Object activityOrContext) {
         HttpEntity httpEntity;
-        SharedPreferences sharedPref = instance.getSharedPreferences(
-                instance.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = getSharedPreferences(activityOrContext);
         String access_token = sharedPref.getString("access_token", null);
 
         if (access_token != null) {
@@ -69,25 +68,23 @@ public class RestTemplateManager {
         return httpEntity;
     }
 
-    public static HttpEntity authenticateRequestWithObject(Activity instance, Object object) {
+    public static HttpEntity authenticateRequestWithObject(Object activityOrContext, Object object) {
         HttpEntity httpEntity;
-        SharedPreferences sharedPref = instance.getSharedPreferences(
-                instance.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = getSharedPreferences(activityOrContext);
         String access_token = sharedPref.getString("access_token", null);
 
         if (access_token != null) {
             HttpHeaders headers = new HttpHeaders();
             headers.set("Authorization", "Bearer " + access_token);
-            httpEntity = new HttpEntity(object,headers);
+            httpEntity = new HttpEntity(object, headers);
         } else {
             httpEntity = new HttpEntity(null);
         }
         return httpEntity;
     }
 
-    public static URLConnection getConnection(Activity instance, String auxUrl) {
-        SharedPreferences sharedPref = instance.getSharedPreferences(
-                instance.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+    public static URLConnection getConnection(Object activityOrContext, String auxUrl) {
+        SharedPreferences sharedPref = getSharedPreferences(activityOrContext);
         String access_token = sharedPref.getString("access_token", null);
 
         URL url = null;
@@ -106,7 +103,31 @@ public class RestTemplateManager {
         return connection;
     }
 
-    public static String getUrl(Activity instance, String partialUrl) {
-        return instance.getString(R.string.ip_server) + partialUrl;
+    public static String getUrl(Object activityOrContext, String partialUrl) {
+        String url;
+        if (activityOrContext instanceof Activity) {
+            Activity activity = (Activity) activityOrContext;
+            url = activity.getString(R.string.ip_server) + partialUrl;
+        } else {
+            Context context = (Context) activityOrContext;
+            url = context.getString(R.string.ip_server) + partialUrl;
+        }
+        return url;
+    }
+
+    private static SharedPreferences getSharedPreferences(Object activityOrContext) {
+        SharedPreferences sharedPref = null;
+        if (activityOrContext instanceof Activity) {
+            Activity instance;
+            instance = (Activity) activityOrContext;
+            sharedPref = instance.getSharedPreferences(
+                    instance.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        } else if (activityOrContext instanceof Context) {
+            Context instance;
+            instance = (Context) activityOrContext;
+            sharedPref = instance.getSharedPreferences(
+                    instance.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        }
+        return sharedPref;
     }
 }

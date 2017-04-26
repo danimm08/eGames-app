@@ -41,7 +41,7 @@ public class DetailsOfGameActivity extends AppCompatActivity implements DetailsO
 
         mImageView = (ImageView) findViewById(R.id.user_image);
         mTitle = (TextView) findViewById(R.id.user_name);
-        mPlatform = (TextView) findViewById(R.id.user_username);
+        mPlatform = (TextView) findViewById(R.id.exchange_created_on_message);
         mGenres = (TextView) findViewById(R.id.user_exchanges);
         spinner = (Spinner) findViewById(R.id.card_personalgames_orderBy);
 

@@ -8,8 +8,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.android.gms.plus.model.people.Person;
-
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -110,7 +108,7 @@ public class MyExchangeRecyclerViewAdapter extends RecyclerView.Adapter<MyExchan
             super(view);
             mView = view;
             mDateView = (TextView) view.findViewById(R.id.item_exchange_date);
-            mStateButton = (Button) view.findViewById(R.id.item_exchange_state);
+            mStateButton = (Button) view.findViewById(R.id.exchange_state);
             mUsername = (TextView) view.findViewById(R.id.item_exchange_username);
             mTheirExchanges = (TextView) view.findViewById(R.id.item_exchange_their_games_content);
             mMyExchanges = (TextView) view.findViewById(R.id.item_exchange_my_games_content);

@@ -40,7 +40,7 @@ public class PersonalGameDetailsActivity extends AppCompatActivity implements Im
 
         mImageView = (ImageView) findViewById(R.id.user_image);
         mTitle = (TextView) findViewById(R.id.user_name);
-        mPlatform = (TextView) findViewById(R.id.user_username);
+        mPlatform = (TextView) findViewById(R.id.exchange_created_on_message);
         mGenres = (TextView) findViewById(R.id.user_exchanges);
 
         MyGameDetailsFormRecyclerViewAdapter.RequestForImageTask task = new MyGameDetailsFormRecyclerViewAdapter.RequestForImageTask();

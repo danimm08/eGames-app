@@ -158,6 +158,8 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onListFragmentInteraction(DetailsOfExchangeForm item) {
-
+        Intent intent = new Intent(this, ExchangeDetailsActivity.class);
+        intent.putExtra("detailsOfExchangeForm", item);
+        startActivity(intent);
     }
 }

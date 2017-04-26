@@ -5,8 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -24,8 +22,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import es.egames.R;
@@ -33,7 +29,6 @@ import es.egames.forms.GameDetailsForm;
 import es.egames.forms.SoughtItem;
 import es.egames.fragments.SoughtItemFragment;
 import es.egames.model.Game;
-import es.egames.model.Image;
 import es.egames.model.PersonalGame;
 import es.egames.model.User;
 import es.egames.utils.RestTemplateManager;
@@ -78,7 +73,7 @@ public class UserDetailsActivity extends AppCompatActivity implements SoughtItem
 
         userImage = (ImageView) findViewById(R.id.user_image);
         userName = (TextView) findViewById(R.id.user_name);
-        userUserName = (TextView) findViewById(R.id.user_username);
+        userUserName = (TextView) findViewById(R.id.exchange_created_on_message);
         userRating = (RatingBar) findViewById(R.id.user_rating);
         userExchanges = (TextView) findViewById(R.id.user_exchanges);
         userAction = (Button) findViewById(R.id.user_action_button);

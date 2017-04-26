@@ -158,4 +158,13 @@
     <string name="accepted">Accepted</string>
     <string name="denied">Denied</string>
     <string name="pending">Pending</string>
+    <string name="title_activity_exchange_details">ExchangeDetailsActivity</string>
+    <string name="create_on">Created on</string>
+    <string name="update_on">Update on</string>
+    <string name="attemps">attemps</string>
+    <string name="accept">Accept</string>
+    <string name="denny">Denny</string>
+    <string name="negotiate">Negotiate</string>
+    <string name="notes">Notes</string>
+    <string name="on">on</string>
 </resources>
