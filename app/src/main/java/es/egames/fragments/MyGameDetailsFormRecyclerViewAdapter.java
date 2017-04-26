@@ -82,7 +82,7 @@ public class MyGameDetailsFormRecyclerViewAdapter extends RecyclerView.Adapter<M
             super(view);
             mView = view;
             mImageView = (ImageView) view.findViewById(R.id.card_game_image);
-            mTitle = (TextView) view.findViewById(R.id.card_personalgame_username);
+            mTitle = (TextView) view.findViewById(R.id.item_exchange_date);
             mPlatform = (TextView) view.findViewById(R.id.card_game_platform);
         }
 

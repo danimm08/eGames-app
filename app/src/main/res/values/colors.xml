@@ -5,4 +5,7 @@
     <color name="colorAccent">#49b53f</color>
     <color name="white">#fff</color>
     <color name="gray">#9b9e9b</color>
+    <color name="holo_orange_dark">#ffff8800</color>
+    <color name="holo_green_dark">#ff669900</color>
+    <color name="holo_red_dark">#ffcc0000</color>
 </resources>

@@ -18,7 +18,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/card_personalgame_username"
+            android:id="@+id/item_exchange_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/md_keylines"
@@ -33,7 +33,7 @@
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/card_personalgame_username"
+            android:layout_alignRight="@+id/item_exchange_date"
             android:layout_marginBottom="@dimen/md_keylines"
             android:layout_marginEnd="16dp"
             android:layout_marginLeft="@dimen/md_keylines"
@@ -41,32 +41,32 @@
             android:numStars="5" />
 
         <TextView
-            android:id="@+id/card_personalgame_type"
+            android:id="@+id/item_exchange_username"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/card_personalgame_username"
+            android:layout_below="@+id/item_exchange_date"
 
             android:layout_marginLeft="@dimen/md_keylines"
 
             />
 
         <TextView
-            android:id="@+id/card_personalgame_numberDescription"
+            android:id="@+id/item_exchange_their_games_description"
             android:layout_width="165dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/card_personalgame_username"
-            android:layout_toEndOf="@+id/card_personalgame_type"
+            android:layout_below="@+id/item_exchange_date"
+            android:layout_toEndOf="@+id/item_exchange_username"
             android:paddingEnd="16dp"
             android:textAlignment="viewEnd" />
 
         <TextView
-            android:id="@+id/card_personalgame_number"
+            android:id="@+id/item_exchange_their_games_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/card_personalgame_username"
+            android:layout_below="@+id/item_exchange_date"
             android:layout_marginEnd="16dp"
 
-            android:layout_toRightOf="@+id/card_personalgame_numberDescription"
+            android:layout_toRightOf="@+id/item_exchange_their_games_description"
             android:text="5"
             android:textColor="@color/colorPrimary" />
 

@@ -7,9 +7,9 @@
             android:icon="@drawable/ic_games_black_24dp"
             android:title="@string/games" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/my_exchanges"
+            android:icon="@drawable/ic_exchange_arrow_white_24dp"
+            android:title="@string/my_exchanges" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"

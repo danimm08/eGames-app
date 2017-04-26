@@ -26,6 +26,8 @@ public class DetailsOfExchangeForm  implements Serializable {
     private Set<PersonalGame> personalGameUser1;
     private Set<PersonalGame> personalGameUser2;
 
+    public DetailsOfExchangeForm() {
+    }
 
     public DetailsOfExchangeForm(Exchange exchange, Set<PersonalGame> personalGameUser1, Set<PersonalGame> personalGameUser2) {
         this.creationDate = exchange.getCreationDate();

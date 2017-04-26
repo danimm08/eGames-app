@@ -154,4 +154,8 @@
     <string name="unfollow">Unfollow</string>
     <string name="edit_info">Edit</string>
     <string name="error_follow">An error has occurred following / following this user</string>
+    <string name="my_exchanges">My exchanges</string>
+    <string name="accepted">Accepted</string>
+    <string name="denied">Denied</string>
+    <string name="pending">Pending</string>
 </resources>

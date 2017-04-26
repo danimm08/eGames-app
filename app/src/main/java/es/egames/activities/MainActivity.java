@@ -18,14 +18,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import es.egames.R;
+import es.egames.forms.DetailsOfExchangeForm;
 import es.egames.forms.GameDetailsForm;
+import es.egames.fragments.ExchangeFragment;
 import es.egames.fragments.GameDetailsFormList;
 import es.egames.fragments.GameTabsFragment;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, GameDetailsFormList.OnListFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, GameDetailsFormList.OnListFragmentInteractionListener, ExchangeFragment.OnListFragmentInteractionListener {
 
     private Fragment gameTabsFragment;
+    private Fragment myExchangesFragment;
     private SearchView searchView;
 
     @Override
@@ -109,24 +112,16 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_games) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-            // Replace whatever is in the fragment_container view with this fragment,
-            // and add the transaction to the back stack
             transaction.replace(R.id.content_main, gameTabsFragment);
             transaction.addToBackStack(null);
-
-            // Commit the transaction
             transaction.commit();
-//            fragmentManager.beginTransaction().replace(R.id.content_main, new GameTabsFragment()).commit();
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.my_exchanges) {
+            if(myExchangesFragment==null){
+                myExchangesFragment = new ExchangeFragment();
+            }
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-            // Replace whatever is in the fragment_container view with this fragment,
-            // and add the transaction to the back stack
-            transaction.replace(R.id.content_main, new Fragment());
+            transaction.replace(R.id.content_main, myExchangesFragment);
             transaction.addToBackStack(null);
-
-            // Commit the transaction
             transaction.commit();
         } else if (id == R.id.nav_slideshow) {
             fragmentManager.beginTransaction().replace(R.id.content_main, new Fragment()).commit();
@@ -158,6 +153,11 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent(this, DetailsOfGameActivity.class);
         intent.putExtra("game", gameDetailsForm);
         startActivity(intent);
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(DetailsOfExchangeForm item) {
 
     }
 }

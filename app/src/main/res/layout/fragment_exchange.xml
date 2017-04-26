@@ -3,16 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
-    android:layout_width="395dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
+    android:layout_marginBottom="0dp"
+    android:layout_marginLeft="0dp"
+    android:layout_marginRight="0dp"
     android:elevation="0dp"
     android:foreground="?attr/selectableItemBackground"
-    app:cardElevation="0dp"
-    tools:context="es.egames.fragments.PersonalGameDetailsActivityFragment"
-    tools:layout_editor_absoluteX="8dp"
-    tools:layout_editor_absoluteY="0dp"
-    tools:showIn="@layout/activity_personal_game_details">
+    app:cardElevation="0dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,85 +19,77 @@
 
         <TextView
             android:id="@+id/item_exchange_date"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/md_keylines"
+            android:layout_marginBottom="4dp"
             android:layout_marginLeft="@dimen/md_keylines"
             android:layout_marginTop="@dimen/md_keylines"
             android:ellipsize="end"
             android:singleLine="true"
+            android:text="12/02/2017"
             android:textSize="@dimen/article_subheading" />
 
-        <RatingBar
-            android:id="@+id/user_rating"
-            style="?android:attr/ratingBarStyleSmall"
+        <Button
+            android:id="@+id/item_exchange_state"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/item_exchange_date"
-            android:layout_marginBottom="@dimen/md_keylines"
-            android:layout_marginEnd="16dp"
-            android:layout_marginLeft="@dimen/md_keylines"
-            android:layout_marginTop="@dimen/md_keylines"
-            android:numStars="5" />
-
-        <TextView
-            android:id="@+id/card_personalgame_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/item_exchange_date"
-            android:layout_marginBottom="@dimen/md_keylines"
-            android:layout_marginLeft="@dimen/md_keylines"
-
-            />
+            android:layout_alignParentEnd="true"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:text="Pending"
+            android:textColor="@android:color/holo_orange_dark" />
 
         <TextView
             android:id="@+id/item_exchange_username"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/card_personalgame_description"
+            android:layout_below="@+id/item_exchange_date"
 
             android:layout_marginLeft="@dimen/md_keylines"
 
-            />
+            android:text="danimoreno" />
 
         <TextView
             android:id="@+id/item_exchange_their_games_description"
-            android:layout_width="165dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/card_personalgame_description"
-            android:layout_toEndOf="@+id/item_exchange_username"
+            android:layout_below="@+id/item_exchange_username"
+            android:layout_marginLeft="@dimen/md_keylines"
             android:paddingEnd="16dp"
-            android:textAlignment="viewEnd" />
+            android:text="@string/exchange_their_games"
+            android:textAlignment="viewStart" />
 
         <TextView
             android:id="@+id/item_exchange_their_games_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/card_personalgame_description"
+            android:layout_below="@+id/item_exchange_username"
             android:layout_marginEnd="16dp"
-
             android:layout_toRightOf="@+id/item_exchange_their_games_description"
+            android:text="Fifa 17, Uncharted 4"
             android:textColor="@color/colorPrimary" />
 
         <TextView
-            android:id="@+id/card_personalgame_distanceDescription"
-            android:layout_width="165dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/item_exchange_their_games_description"
-            android:layout_toEndOf="@+id/item_exchange_username"
-            android:paddingEnd="16dp"
-            android:textAlignment="viewEnd" />
-
-        <TextView
-            android:id="@+id/card_personalgame_distanceNumber"
+            android:id="@+id/item_exchange_my_games_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/item_exchange_their_games_description"
-            android:layout_marginEnd="16dp"
+            android:layout_below="@+id/item_exchange_their_games_content"
+            android:layout_marginBottom="@dimen/md_keylines"
+            android:layout_marginLeft="@dimen/md_keylines"
+            android:paddingEnd="16dp"
+            android:text="@string/exchange_my_games"
+            android:textAlignment="viewStart" />
 
+        <TextView
+            android:id="@+id/item_exchange_my_games_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/item_exchange_their_games_content"
+            android:layout_marginEnd="16dp"
             android:layout_toRightOf="@+id/item_exchange_their_games_description"
+            android:text="NBA 2K 17"
             android:textColor="@color/colorPrimary" />
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>
-
