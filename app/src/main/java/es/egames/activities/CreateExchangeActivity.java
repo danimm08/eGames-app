@@ -79,7 +79,7 @@ public class CreateExchangeActivity extends AppCompatActivity {
         }
         List<String> myPersonalGamesToString = new ArrayList<>();
         for (PersonalGame pg : aux.getPersonalGamesUser1()) {
-            myPersonalGamesToString.add(pg.getGame().getTitle() + " " + pg.getGame().getPlatform());
+            myPersonalGamesToString.add(pg.getGame().getTitle() + " " + "(" + pg.getGame().getPlatform().getName() + ")");
         }
         List<String> theirPersonalGamesToString = new ArrayList<>();
         for (PersonalGame pg : aux.getPersonalGamesUser2()) {
