@@ -19,7 +19,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/item_exchange_date"
+            android:id="@+id/note_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/md_keylines"
@@ -34,7 +34,7 @@
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/item_exchange_date"
+            android:layout_alignRight="@+id/note_username"
             android:layout_marginBottom="@dimen/md_keylines"
             android:layout_marginEnd="16dp"
             android:layout_marginLeft="@dimen/md_keylines"
@@ -45,14 +45,14 @@
             android:id="@+id/card_personalgame_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/item_exchange_date"
+            android:layout_below="@+id/note_username"
             android:layout_marginBottom="@dimen/md_keylines"
             android:layout_marginLeft="@dimen/md_keylines"
 
             />
 
         <TextView
-            android:id="@+id/item_exchange_username"
+            android:id="@+id/note_date"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/card_personalgame_description"
@@ -66,7 +66,7 @@
             android:layout_width="165dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/card_personalgame_description"
-            android:layout_toEndOf="@+id/item_exchange_username"
+            android:layout_toEndOf="@+id/note_date"
             android:paddingEnd="16dp"
             android:textAlignment="viewEnd" />
 
@@ -85,7 +85,7 @@
             android:layout_width="165dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/item_exchange_their_games_description"
-            android:layout_toEndOf="@+id/item_exchange_username"
+            android:layout_toEndOf="@+id/note_date"
             android:paddingEnd="16dp"
             android:textAlignment="viewEnd" />
 

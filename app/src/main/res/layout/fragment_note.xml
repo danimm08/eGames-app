@@ -1,20 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:layout_gravity="center"
+    android:layout_marginLeft="0dp"
+    android:layout_marginRight="0dp"
+    android:elevation="0dp"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardElevation="0dp">
 
-    <TextView
-        android:id="@+id/id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem" />
-</LinearLayout>
+        <TextView
+            android:id="@+id/note_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/md_keylines"
+            android:layout_marginTop="16dp"
+            android:text="22/02/2017" />
+
+        <TextView
+            android:id="@+id/note_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/note_date"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="@dimen/md_keylines"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="danimoreno"
+            android:textSize="@dimen/article_subheading" />
+
+        <TextView
+            android:id="@+id/note_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/note_username"
+            android:layout_marginBottom="@dimen/md_keylines"
+            android:layout_marginLeft="@dimen/md_keylines"
+            android:ellipsize="end"
+            android:singleLine="false"
+            android:text="¿Te parece bien el intercambio?"
+            android:textSize="@dimen/article_subheading" />
+
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

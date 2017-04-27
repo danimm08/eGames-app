@@ -1,6 +1,8 @@
 package es.egames.fragments;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,8 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import es.egames.R;
 import es.egames.forms.SoughtItem;
@@ -62,10 +66,16 @@ public class ExchangeGameFragment extends Fragment {
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
             List<SoughtItem> soughtItemList = new ArrayList<>();
+            MyGameDetailsFormRecyclerViewAdapter.RequestForImageTask requestForImageTask = new MyGameDetailsFormRecyclerViewAdapter.RequestForImageTask();
             for (PersonalGame pg : personalGames) {
-                soughtItemList.add(SoughtItem.createFromGame(pg.getGame()));
+                SoughtItem soughtItem = SoughtItem.createFromGame(pg.getGame());
+                try {
+                    soughtItem.setImage(requestForImageTask.execute(pg.getGame().getCoverUrl()).get());
+                } catch (InterruptedException | ExecutionException e) {
+                    soughtItem.setImage(null);
+                }
+                soughtItemList.add(soughtItem);
             }
-
             recyclerView.setAdapter(new MySoughtItemRecyclerViewAdapter(soughtItemList, null));
         }
         return view;

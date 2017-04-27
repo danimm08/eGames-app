@@ -153,12 +153,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean isUserNameValid(String username) {
-        //TODO: Replace this with your own logic
         return true;
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
         return true;
     }
 

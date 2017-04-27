@@ -212,7 +212,6 @@ public class UserDetailsActivity extends AppCompatActivity implements SoughtItem
     }
 
     public class RequestForImageTask extends AsyncTask<String, Void, Bitmap> {
-        //TODO: Averiguar porqué no se muestra la imagen, y después mostrar la información de la parte inferior adecuadametne.
 
         public RequestForImageTask() {
             super();

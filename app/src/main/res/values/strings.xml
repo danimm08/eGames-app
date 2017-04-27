@@ -167,4 +167,6 @@
     <string name="negotiate">Negotiate</string>
     <string name="notes">Notes</string>
     <string name="on">on</string>
+    <string name="details_exchange">Details of exchange</string>
+    <string name="qualify">Qualify</string>
 </resources>

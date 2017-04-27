@@ -1,5 +1,6 @@
 package es.egames.fragments;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,23 +9,21 @@ import android.widget.TextView;
 
 import es.egames.R;
 import es.egames.fragments.NoteFragment.OnListFragmentInteractionListener;
-import es.egames.fragments.dummy.DummyContent.DummyItem;
+import es.egames.model.Note;
 
+import java.text.DateFormat;
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
 public class MyNoteRecyclerViewAdapter extends RecyclerView.Adapter<MyNoteRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private final List<Note> mValues;
     private final OnListFragmentInteractionListener mListener;
+    private Context context;
 
-    public MyNoteRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public MyNoteRecyclerViewAdapter(List<Note> items, OnListFragmentInteractionListener listener, Context context) {
         mValues = items;
         mListener = listener;
+        this.context = context;
     }
 
     @Override
@@ -37,8 +36,11 @@ public class MyNoteRecyclerViewAdapter extends RecyclerView.Adapter<MyNoteRecycl
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+
+        DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(context);
+        holder.mDateView.setText(dateFormat.format(mValues.get(position).getDate()));
+        holder.mUsernameView.setText(mValues.get(position).getUser().getUserAccount().getUsername());
+        holder.mTextView.setText(mValues.get(position).getText());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,20 +61,22 @@ public class MyNoteRecyclerViewAdapter extends RecyclerView.Adapter<MyNoteRecycl
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public DummyItem mItem;
+        public final TextView mDateView;
+        public final TextView mUsernameView;
+        public final TextView mTextView;
+        public Note mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.id);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            mDateView = (TextView) view.findViewById(R.id.note_date);
+            mUsernameView = (TextView) view.findViewById(R.id.note_username);
+            mTextView = (TextView) view.findViewById(R.id.note_text);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + mUsernameView.getText() + "'";
         }
     }
 }

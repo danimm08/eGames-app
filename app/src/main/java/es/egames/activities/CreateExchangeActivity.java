@@ -2,6 +2,8 @@ package es.egames.activities;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +26,7 @@ import java.util.concurrent.ExecutionException;
 
 import es.egames.R;
 import es.egames.forms.ExchangeForm;
+import es.egames.fragments.ExchangeFragment;
 import es.egames.model.Exchange;
 import es.egames.model.Note;
 import es.egames.model.PersonalGame;
@@ -171,9 +174,13 @@ public class CreateExchangeActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(getApplicationContext(), R.string.error_general, Toast.LENGTH_LONG);
                 toast.show();
             } else {
-                //TODO: Enviar a actividad de ver todos los exchange
-                Toast toast = Toast.makeText(getApplicationContext(), "TODO: Enviar a actividad de ver todos los exchange", Toast.LENGTH_LONG);
-                toast.show();
+                //TODO: Enviar a main activity
+//                ExchangeFragment myExchangesFragment = new ExchangeFragment();
+//                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//                transaction.replace(R.id.content_main, myExchangesFragment);
+//                transaction.commit();
+//                Toast toast = Toast.makeText(getApplicationContext(), "
+//                toast.show();
             }
         }
 

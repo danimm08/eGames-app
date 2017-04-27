@@ -14,8 +14,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:descendantFocusability="blocksDescendants">
+            android:descendantFocusability="blocksDescendants"
+            android:orientation="vertical">
 
             <android.support.design.widget.AppBarLayout
                 android:layout_width="match_parent"
@@ -124,12 +124,26 @@
                         android:textSize="@dimen/article_subheading" />
 
                     <TextView
-                        android:id="@+id/exchange_num"
+                        android:id="@+id/exchange_username"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/exchange_state"
                         android:layout_marginLeft="@dimen/md_keylines"
                         android:layout_marginRight="@dimen/md_keylines"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:text="@string/update_on"
+                        android:textSize="@dimen/article_subheading"
+                        tools:text="danimoreno" />
+
+                    <TextView
+                        android:id="@+id/exchange_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/exchange_state"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginRight="@dimen/md_keylines"
+                        android:layout_toEndOf="@id/exchange_username"
                         android:ellipsize="end"
                         android:singleLine="true"
                         android:text="@string/update_on"
@@ -154,10 +168,10 @@
                         android:id="@+id/exchange_type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toEndOf="@id/exchange_num_description"
-                        android:layout_marginLeft="@dimen/md_keylines"
                         android:layout_below="@+id/exchange_event"
+                        android:layout_marginLeft="25dp"
                         android:layout_marginRight="@dimen/md_keylines"
+                        android:layout_toEndOf="@id/exchange_num_description"
                         android:ellipsize="end"
                         android:singleLine="true"
                         android:text="Fijo"
@@ -219,28 +233,23 @@
                         android:text="@string/negotiate"
                         android:textColor="@android:color/holo_orange_dark" />
 
+                    <Button
+                        android:id="@+id/exchange_qualify"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/exchange_way_exchange"
+                        android:layout_marginLeft="6dp"
+                        android:minHeight="0dp"
+                        android:minWidth="0dp"
+                        android:paddingBottom="@dimen/md_keylines"
+                        android:text="@string/qualify"
+                        android:textColor="@android:color/holo_green_dark"
+                        android:visibility="invisible" />
 
 
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
-
-            <TextView
-                android:id="@+id/exchange_notes"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/cardview_light_background"
-                android:paddingBottom="16dp"
-                android:paddingLeft="16dp"
-                android:paddingTop="16dp"
-                android:text="@string/notes"
-                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                android:visibility="visible" />
-
-            <include
-                layout="@layout/content_exchange_details_notes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
 
             <TextView
                 android:id="@+id/exchange_my_games"
@@ -276,25 +285,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <!--<include-->
-                <!--layout="@layout/content_exchange_details_notes"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content" />-->
+            <TextView
+                android:id="@+id/exchange_notes"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/cardview_light_background"
+                android:paddingBottom="16dp"
+                android:paddingLeft="16dp"
+                android:paddingTop="16dp"
+                android:text="@string/notes"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:visibility="visible" />
 
-            <!--<TextView-->
-                <!--android:id="@+id/exchange_their_games"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_marginLeft="16dp"-->
-                <!--android:background="@color/cardview_light_background"-->
-                <!--android:text="@string/exchange_their_games"-->
-                <!--android:textAppearance="@style/TextAppearance.AppCompat.Headline"-->
-                <!--android:visibility="visible" />-->
-
-            <!--<include-->
-                <!--layout="@layout/content_exchange_details_notes"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content" />-->
+            <include
+                layout="@layout/content_exchange_details_notes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
 
         </LinearLayout>

@@ -41,10 +41,10 @@ public class PersonalGameDetailsActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_personal_game_details, container, false);
 
-        mUsername = (TextView) view.findViewById(R.id.item_exchange_date);
+        mUsername = (TextView) view.findViewById(R.id.note_username);
         mRatingbar = (RatingBar) view.findViewById(R.id.user_rating);
         mDescription = (TextView) view.findViewById(R.id.card_personalgame_description);
-        mType = (TextView) view.findViewById(R.id.item_exchange_username);
+        mType = (TextView) view.findViewById(R.id.note_date);
         mNumber = (TextView) view.findViewById(R.id.item_exchange_their_games_content);
         mNumberDescription = (TextView) view.findViewById(R.id.item_exchange_their_games_description);
         mDistanceDescription = (TextView) view.findViewById(R.id.card_personalgame_distanceDescription);

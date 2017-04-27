@@ -6,11 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_marginBottom="@dimen/md_keylines"
-    android:layout_marginEnd="@dimen/md_keylines"
-    android:layout_marginLeft="@dimen/md_keylines"
-    android:layout_marginRight="@dimen/md_keylines"
-    android:layout_marginStart="@dimen/md_keylines"
     android:elevation="0dp"
     android:foreground="?attr/selectableItemBackground"
     app:cardElevation="0dp">

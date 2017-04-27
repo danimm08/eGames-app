@@ -16,6 +16,7 @@ import es.egames.model.User;
  * Created by daniel on 31/03/17.
  */
 public class DetailsOfExchangeForm implements Serializable {
+    private Integer id;
     private Date creationDate;
     private Date lastUpdateDate;
     private Boolean status;
@@ -34,6 +35,7 @@ public class DetailsOfExchangeForm implements Serializable {
     }
 
     public DetailsOfExchangeForm(Exchange exchange, Set<PersonalGame> personalGameUser1, Set<PersonalGame> personalGameUser2, List<Note> notes) {
+        this.id = exchange.getId();
         this.creationDate = exchange.getCreationDate();
         this.lastUpdateDate = exchange.getLastUpdateDate();
         this.status = exchange.getStatus();
@@ -46,6 +48,14 @@ public class DetailsOfExchangeForm implements Serializable {
         this.personalGameUser1 = personalGameUser1;
         this.personalGameUser2 = personalGameUser2;
         this.notes = notes;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Date getCreationDate() {

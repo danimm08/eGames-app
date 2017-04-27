@@ -25,6 +25,7 @@ import es.egames.R;
 import es.egames.forms.DetailsOfExchangeForm;
 import es.egames.utils.RestTemplateManager;
 
+//TODO: OnBackToFragment, update data
 public class ExchangeFragment extends Fragment {
 
     private OnListFragmentInteractionListener mListener;

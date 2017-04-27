@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -16,12 +17,14 @@ import org.springframework.web.client.RestTemplate;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import es.egames.R;
 import es.egames.forms.DetailsOfExchangeForm;
 import es.egames.fragments.ExchangeGameFragment;
 import es.egames.fragments.NoteFragment;
+import es.egames.model.PersonalGame;
 import es.egames.model.User;
 import es.egames.utils.RestTemplateManager;
 
@@ -33,17 +36,20 @@ public class ExchangeDetailsActivity extends AppCompatActivity {
     private TextView mUpdate;
     private Button mState;
     private TextView mEvent;
+    private TextView mUsername;
     private TextView mNum;
     private TextView mType;
     private TextView mWayExchange;
     private Button mAccept;
     private Button mDenny;
     private Button mNegotiate;
+    private Button mQualify;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exchange_details);
+        setTitle(R.string.details_exchange);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         detailsOfExchangeForm = (DetailsOfExchangeForm) getIntent().getSerializableExtra("detailsOfExchangeForm");
@@ -58,6 +64,7 @@ public class ExchangeDetailsActivity extends AppCompatActivity {
         mUpdate = (TextView) findViewById(R.id.exchange_update);
         mState = (Button) findViewById(R.id.exchange_state);
         mEvent = (TextView) findViewById(R.id.exchange_event);
+        mUsername = (TextView) findViewById(R.id.exchange_username);
         mNum = (TextView) findViewById(R.id.exchange_num);
         mType = (TextView) findViewById(R.id.exchange_type);
         mWayExchange = (TextView) findViewById(R.id.exchange_way_exchange);
@@ -65,6 +72,7 @@ public class ExchangeDetailsActivity extends AppCompatActivity {
         mAccept = (Button) findViewById(R.id.exchange_accept);
         mDenny = (Button) findViewById(R.id.exchange_denny);
         mNegotiate = (Button) findViewById(R.id.exchange_negotiate);
+        mQualify = (Button) findViewById(R.id.exchange_qualify);
 
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
 
@@ -80,6 +88,7 @@ public class ExchangeDetailsActivity extends AppCompatActivity {
             mAccept.setVisibility(View.INVISIBLE);
             mNegotiate.setVisibility(View.INVISIBLE);
             mDenny.setVisibility(View.INVISIBLE);
+            mQualify.setVisibility(View.VISIBLE);
         } else if (detailsOfExchangeForm.getStatus() == false) {
             mState.setText(R.string.denied);
             mState.setTextColor(getResources().getColor(R.color.holo_red_dark));
@@ -92,6 +101,8 @@ public class ExchangeDetailsActivity extends AppCompatActivity {
             mEvent.setText(getString(R.string.on) + " " + dateFormat.format(detailsOfExchangeForm.getEventDate()));
         }
 
+        List<PersonalGame> aux = new ArrayList<>(detailsOfExchangeForm.getPersonalGameUser2());
+        mUsername.setText(aux.get(0).getUser().getUserAccount().getUsername());
         mNum.setText(detailsOfExchangeForm.getNumberOfAttemps().toString());
         mType.setText(detailsOfExchangeForm.getType().toString());
         mWayExchange.setText(detailsOfExchangeForm.getWayExchange());
@@ -100,17 +111,21 @@ public class ExchangeDetailsActivity extends AppCompatActivity {
             mAccept.setVisibility(View.INVISIBLE);
         }
 
+        RequesForCheckIsAllowedToQualify requesForCheckIsAllowedToQualify = new RequesForCheckIsAllowedToQualify();
+        requesForCheckIsAllowedToQualify.execute();
+
+        final RequestForAcceptOrDenny requestForAcceptOrDenny = new RequestForAcceptOrDenny();
         mAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: Lanzar petición aceptar
+                requestForAcceptOrDenny.execute(true);
             }
         });
 
         mDenny.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: Lanzar petición aceptar
+                requestForAcceptOrDenny.execute(false);
             }
         });
 
@@ -121,7 +136,15 @@ public class ExchangeDetailsActivity extends AppCompatActivity {
             }
         });
 
-        NoteFragment fragment = new NoteFragment();
+        mQualify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO: Lanzar actividad para calificar
+            }
+        });
+
+
+        NoteFragment fragment = NoteFragment.newInstance(new ArrayList<>(detailsOfExchangeForm.getNotes()));
         ExchangeGameFragment fragment1 = ExchangeGameFragment.newInstance(new ArrayList(detailsOfExchangeForm.getPersonalGameUser1()));
         ExchangeGameFragment fragment2 = ExchangeGameFragment.newInstance(new ArrayList(detailsOfExchangeForm.getPersonalGameUser2()));
 
@@ -157,6 +180,98 @@ public class ExchangeDetailsActivity extends AppCompatActivity {
             return u;
         }
 
+    }
+
+    public class RequestForAcceptOrDenny extends AsyncTask<Boolean, Void, Boolean> {
+
+        public RequestForAcceptOrDenny() {
+            super();
+        }
+
+        @Override
+        protected Boolean doInBackground(Boolean... params) {
+            RestTemplate restTemplate = RestTemplateManager.create();
+            HttpEntity headers = RestTemplateManager.authenticateRequest(getApplicationContext());
+            String url;
+            if (params[0]) {
+                url = RestTemplateManager.getUrl(getApplicationContext(), "exchange/accept?exchangeId=" + detailsOfExchangeForm.getId());
+            } else {
+                url = RestTemplateManager.getUrl(getApplicationContext(), "exchange/decline?exchangeId=" + detailsOfExchangeForm.getId());
+            }
+            Boolean isAccept = null;
+            ResponseEntity<Boolean> responseEntity;
+            try {
+                responseEntity = restTemplate.exchange(url, HttpMethod.GET, headers, Boolean.class);
+                if (responseEntity.getStatusCode().equals(HttpStatus.OK)) {
+                    if (params[0]) {
+                        isAccept = true;
+                    } else {
+                        isAccept = false;
+                    }
+
+                }
+            } catch (Exception oops) {
+                isAccept = null;
+            }
+            return isAccept;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            if (aBoolean == null) {
+                Toast.makeText(getApplicationContext(), R.string.error_general, Toast.LENGTH_LONG).show();
+            } else if (aBoolean) {
+                super.onPostExecute(aBoolean);
+                mState.setText(R.string.accepted);
+                mState.setTextColor(getResources().getColor(R.color.holo_green_dark));
+                mAccept.setVisibility(View.INVISIBLE);
+                mNegotiate.setVisibility(View.INVISIBLE);
+                mDenny.setVisibility(View.INVISIBLE);
+                mQualify.setVisibility(View.VISIBLE);
+            } else if (!aBoolean) {
+                mState.setText(R.string.denied);
+                mState.setTextColor(getResources().getColor(R.color.holo_red_dark));
+                mAccept.setVisibility(View.INVISIBLE);
+                mNegotiate.setVisibility(View.INVISIBLE);
+                mDenny.setVisibility(View.INVISIBLE);
+            }
+        }
+    }
+
+    public class RequesForCheckIsAllowedToQualify extends AsyncTask<Boolean, Void, Boolean> {
+
+        public RequesForCheckIsAllowedToQualify() {
+            super();
+        }
+
+        @Override
+        protected Boolean doInBackground(Boolean... params) {
+            RestTemplate restTemplate = RestTemplateManager.create();
+            HttpEntity headers = RestTemplateManager.authenticateRequest(getApplicationContext());
+            String url;
+            url = RestTemplateManager.getUrl(getApplicationContext(), "qualification/checkIsAllowedToQualify?exchangeId=" + detailsOfExchangeForm.getId());
+
+            Boolean res = false;
+            ResponseEntity<Boolean> responseEntity;
+            try {
+                responseEntity = restTemplate.exchange(url, HttpMethod.GET, headers, Boolean.class);
+                if (responseEntity.getStatusCode().equals(HttpStatus.OK)) {
+                    res = responseEntity.getBody();
+                }
+            } catch (Exception oops) {
+                res = false;
+            }
+            return res;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            if (aBoolean) {
+                mQualify.setVisibility(View.VISIBLE);
+            }else{
+                mQualify.setVisibility(View.INVISIBLE);
+            }
+        }
     }
 
 }
