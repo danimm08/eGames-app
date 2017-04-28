@@ -160,7 +160,6 @@ public class CreateExchangeActivity extends AppCompatActivity {
             String url = RestTemplateManager.getUrl(instance, "exchange/save");
             try {
                 ResponseEntity<Object> responseEntity = restTemplate.exchange(url, HttpMethod.POST, httpEntity, Object.class);
-                System.out.println("Breakpoint");
                 if (responseEntity.getStatusCode().equals(HttpStatus.OK)) {
                     hasErrors = false;
                 } else {

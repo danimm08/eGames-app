@@ -67,8 +67,6 @@ public class PersonalGameDetailsActivity extends AppCompatActivity implements Im
                 Intent intent = new Intent(getApplicationContext(),CreateExchangeActivity.class);
                 intent.putExtra("personalgame",personalGame);
                 startActivity(intent);
-                Snackbar.make(view, "Launch Activity CreateExchange", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
             }
         });
 

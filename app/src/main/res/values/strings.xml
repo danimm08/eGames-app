@@ -174,4 +174,8 @@
     <string name="text">Text</string>
     <string name="rating">Rating</string>
     <string name="qualifications">Qualifications</string>
+    <string name="title_activity_create_personal_game">CreatePersonalGameActivity</string>
+    <string name="type">Type of desired exchange </string>
+    <string name="description">Description</string>
+    <string name="create_personal_game">Create personal game</string>
 </resources>

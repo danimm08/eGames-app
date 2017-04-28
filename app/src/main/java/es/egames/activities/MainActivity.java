@@ -68,7 +68,10 @@ public class MainActivity extends AppCompatActivity
                 transaction.replace(R.id.content_main, myExchangesFragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
+            } else if (shortClassName.equals("CreatePersonalGameActivity")) {
+                //TODO: Llevar a detalles personales del usuario logueado
             }
+
 
         }
 

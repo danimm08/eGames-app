@@ -3,6 +3,7 @@ package es.egames.activities;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,11 +14,14 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.concurrent.ExecutionException;
+
 import es.egames.R;
 import es.egames.forms.GameDetailsForm;
 import es.egames.fragments.DetailsOfGameActivityFragment;
 import es.egames.fragments.MyGameDetailsFormRecyclerViewAdapter;
 import es.egames.model.PersonalGame;
+import es.egames.model.User;
 
 public class DetailsOfGameActivity extends AppCompatActivity implements DetailsOfGameActivityFragment.OnListFragmentInteractionListener, AdapterView.OnItemSelectedListener {
 
@@ -36,7 +40,6 @@ public class DetailsOfGameActivity extends AppCompatActivity implements DetailsO
         setSupportActionBar(toolbar);
 
         gameDetailsForm = (GameDetailsForm) getIntent().getSerializableExtra("game");
-
         setTitle(gameDetailsForm.getTitle());
 
         mImageView = (ImageView) findViewById(R.id.user_image);
@@ -67,11 +70,21 @@ public class DetailsOfGameActivity extends AppCompatActivity implements DetailsO
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.add_personal_game);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), CreatePersonalGameActivity.class);
+                intent.putExtra("gameDetailsForm", gameDetailsForm);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
     public void onListFragmentInteraction(PersonalGame personalGame) {
-        Intent intent = new Intent(this,PersonalGameDetailsActivity.class);
+        Intent intent = new Intent(this, PersonalGameDetailsActivity.class);
         intent.putExtra("game", gameDetailsForm);
         intent.putExtra("personalgame", personalGame);
         startActivity(intent);
