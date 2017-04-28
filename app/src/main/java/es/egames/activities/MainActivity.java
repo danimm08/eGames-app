@@ -1,5 +1,6 @@
 package es.egames.activities;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -51,6 +52,26 @@ public class MainActivity extends AppCompatActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
         gameTabsFragment = new GameTabsFragment();
         fragmentManager.beginTransaction().replace(R.id.content_main, gameTabsFragment).commit();
+
+        redirect();
+    }
+
+    private void redirect() {
+        ComponentName callingActivity = getCallingActivity();
+        if (callingActivity != null) {
+            String shortClassName = callingActivity.getShortClassName().replace(".activities.", "");
+            if (shortClassName.equals("CreateExchangeActivity") || shortClassName.equals("QualifyExchangeActivity") || shortClassName.equals("NegotiateExchangeActivity")) {
+                if (myExchangesFragment == null) {
+                    myExchangesFragment = new ExchangeFragment();
+                }
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.content_main, myExchangesFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+
+        }
+
     }
 
     @Override
@@ -116,7 +137,7 @@ public class MainActivity extends AppCompatActivity
             transaction.addToBackStack(null);
             transaction.commit();
         } else if (id == R.id.my_exchanges) {
-            if(myExchangesFragment==null){
+            if (myExchangesFragment == null) {
                 myExchangesFragment = new ExchangeFragment();
             }
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

@@ -41,8 +41,8 @@ public class GameTabsFragment extends android.support.v4.app.Fragment {
     // Add Fragments to Tabs
     private void setupViewPager(ViewPager viewPager) {
         adapter.addFragment(GameDetailsFormList.newInstance("nearby"), getString(R.string.nearby));
-        adapter.addFragment(GameDetailsFormList.newInstance("recommended"), getString(R.string.recommended));
         adapter.addFragment(GameDetailsFormList.newInstance("followed"), getString(R.string.followed));
+        adapter.addFragment(GameDetailsFormList.newInstance("recommended"), getString(R.string.recommended));
         viewPager.setAdapter(adapter);
     }
 

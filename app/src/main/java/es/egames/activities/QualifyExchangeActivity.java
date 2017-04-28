@@ -1,5 +1,6 @@
 package es.egames.activities;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -94,7 +95,8 @@ public class QualifyExchangeActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(getApplicationContext(), R.string.error_general, Toast.LENGTH_LONG);
                 toast.show();
             } else {
-                Toast.makeText(getApplicationContext(), "Enviar a actividad, éxito", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivityForResult(intent, 0);
             }
         }
 

@@ -1,5 +1,6 @@
 package es.egames.activities;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -81,7 +82,7 @@ public class NegotiateExchangeActivity extends AppCompatActivity {
         try {
             currentExchange = requestForGetExchangeFormInfo.execute().get();
         } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
+            currentExchange = null;
         }
 
         List<String> myPersonalGamesToString = new ArrayList<>();
@@ -232,14 +233,8 @@ public class NegotiateExchangeActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(getApplicationContext(), R.string.error_general, Toast.LENGTH_LONG);
                 toast.show();
             } else {
-                Toast.makeText(getApplicationContext(), "Enviar a actividad, éxito", Toast.LENGTH_LONG).show();
-                //TODO: Enviar a main activity
-//                ExchangeFragment myExchangesFragment = new ExchangeFragment();
-//                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//                transaction.replace(R.id.content_main, myExchangesFragment);
-//                transaction.commit();
-//                Toast toast = Toast.makeText(getApplicationContext(), "
-//                toast.show();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivityForResult(intent, 0);
             }
         }
 

@@ -1,5 +1,6 @@
 package es.egames.activities;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -77,7 +78,7 @@ public class CreateExchangeActivity extends AppCompatActivity {
         }
         List<String> theirPersonalGamesToString = new ArrayList<>();
         for (PersonalGame pg : aux.getPersonalGamesUser2()) {
-            if(pg.getId()==personalGame.getId()){
+            if (pg.getId() == personalGame.getId()) {
                 personalGame = pg;
             }
             theirPersonalGamesToString.add(pg.getGame().getTitle() + " " + "(" + pg.getGame().getPlatform().getName() + ")");
@@ -113,8 +114,13 @@ public class CreateExchangeActivity extends AppCompatActivity {
         Type type = auxType.equals("Fijo") ? Type.Fijo : Type.Temporal;
 
         String wayExchange = mWayExchange.getText().toString();
-        Note note = new Note();
-        note.setText(mNote.getText().toString());
+        Note note;
+        if (mNote.getText().toString().isEmpty()) {
+            note = null;
+        } else {
+            note = new Note();
+            note.setText(mNote.getText().toString());
+        }
 
         ExchangeForm exchangeForm = new ExchangeForm(personalGameUser1, personalGameUser2, type, wayExchange, note);
         RequestForExchange requestForExchange = new RequestForExchange();
@@ -172,13 +178,8 @@ public class CreateExchangeActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(getApplicationContext(), R.string.error_general, Toast.LENGTH_LONG);
                 toast.show();
             } else {
-                //TODO: Enviar a main activity
-//                ExchangeFragment myExchangesFragment = new ExchangeFragment();
-//                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//                transaction.replace(R.id.content_main, myExchangesFragment);
-//                transaction.commit();
-//                Toast toast = Toast.makeText(getApplicationContext(), "
-//                toast.show();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivityForResult(intent, 0);
             }
         }
 
