@@ -33,12 +33,12 @@ import es.egames.model.PersonalGame;
 import es.egames.model.User;
 import es.egames.utils.RestTemplateManager;
 
-public class UserDetailsActivity extends AppCompatActivity implements SoughtItemFragment.OnListFragmentInteractionListener {
+public class DetailsUserActivity extends AppCompatActivity implements SoughtItemFragment.OnListFragmentInteractionListener {
 
     private User principal;
     private User auxUser;
     public User user;
-    private UserDetailsActivity instance;
+    private DetailsUserActivity instance;
     private ImageView userImage;
     private TextView userName;
     private TextView userUserName;
@@ -151,7 +151,7 @@ public class UserDetailsActivity extends AppCompatActivity implements SoughtItem
                 Toast.makeText(getApplicationContext(), R.string.error_general, Toast.LENGTH_LONG).show();
             }
         } else if (item.getObject() instanceof User) {
-            Intent intent = new Intent(this, UserDetailsActivity.class);
+            Intent intent = new Intent(this, DetailsUserActivity.class);
             intent.putExtra("user", (User) item.getObject());
             startActivity(intent);
         }

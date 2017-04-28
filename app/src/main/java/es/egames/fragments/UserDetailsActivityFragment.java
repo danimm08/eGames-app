@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import es.egames.R;
-import es.egames.activities.UserDetailsActivity;
+import es.egames.activities.DetailsUserActivity;
 import es.egames.adapters.TabsAdapter;
 import es.egames.model.User;
 
@@ -36,11 +36,12 @@ public class UserDetailsActivityFragment extends Fragment {
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        UserDetailsActivity activity = (UserDetailsActivity) getActivity();
+        DetailsUserActivity activity = (DetailsUserActivity) getActivity();
         User u = activity.user;
         adapter.addFragment(SoughtItemFragment.newInstance("personalgames",u), getString(R.string.personal_games));
         adapter.addFragment(SoughtItemFragment.newInstance("followers",u), getString(R.string.followers));
         adapter.addFragment(SoughtItemFragment.newInstance("followees",u), getString(R.string.followees));
+        adapter.addFragment(QualificationFragment.newInstance(u) ,getString(R.string.qualifications));
         viewPager.setAdapter(adapter);
     }
 }

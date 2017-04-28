@@ -4,14 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.Toast;
 
 import org.springframework.http.HttpEntity;
@@ -20,16 +16,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import es.egames.R;
 import es.egames.adapters.TabsAdapter;
 import es.egames.forms.GameDetailsForm;
 import es.egames.forms.SoughtItem;
-import es.egames.fragments.GameDetailsFormList;
 import es.egames.fragments.SoughtItemFragment;
 import es.egames.model.Game;
 import es.egames.model.PersonalGame;
@@ -100,7 +92,7 @@ public class SearchActivity extends AppCompatActivity implements SoughtItemFragm
                 Toast.makeText(getApplicationContext(), R.string.error_general, Toast.LENGTH_LONG).show();
             }
         } else if (item.getObject() instanceof User) {
-            Intent intent = new Intent(this, UserDetailsActivity.class);
+            Intent intent = new Intent(this, DetailsUserActivity.class);
             intent.putExtra("user", (User) item.getObject());
             startActivity(intent);
         }

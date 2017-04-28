@@ -173,4 +173,5 @@
     <string name="title_activity_qualify_exchange">QualifyExchange</string>
     <string name="text">Text</string>
     <string name="rating">Rating</string>
+    <string name="qualifications">Qualifications</string>
 </resources>
