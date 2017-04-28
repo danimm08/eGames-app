@@ -1,5 +1,6 @@
 package es.egames.activities;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -79,22 +80,26 @@ public class ExchangeDetailsActivity extends AppCompatActivity {
         mDate.setText(dateFormat.format(detailsOfExchangeForm.getCreationDate()));
         mUpdate.setText(dateFormat.format(detailsOfExchangeForm.getLastUpdateDate()));
 
+
         if (detailsOfExchangeForm.getStatus() == null) {
             mState.setText(R.string.pending);
             mState.setTextColor(getResources().getColor(R.color.holo_orange_dark));
+            mQualify.setVisibility(View.INVISIBLE);
         } else if (detailsOfExchangeForm.getStatus()) {
             mState.setText(R.string.accepted);
             mState.setTextColor(getResources().getColor(R.color.holo_green_dark));
             mAccept.setVisibility(View.INVISIBLE);
             mNegotiate.setVisibility(View.INVISIBLE);
             mDenny.setVisibility(View.INVISIBLE);
-            mQualify.setVisibility(View.VISIBLE);
+            RequesForCheckIsAllowedToQualify requesForCheckIsAllowedToQualify = new RequesForCheckIsAllowedToQualify();
+            requesForCheckIsAllowedToQualify.execute();
         } else if (detailsOfExchangeForm.getStatus() == false) {
             mState.setText(R.string.denied);
             mState.setTextColor(getResources().getColor(R.color.holo_red_dark));
             mAccept.setVisibility(View.INVISIBLE);
             mNegotiate.setVisibility(View.INVISIBLE);
             mDenny.setVisibility(View.INVISIBLE);
+            mQualify.setVisibility(View.INVISIBLE);
         }
 
         if (detailsOfExchangeForm.getEventDate() != null) {
@@ -110,9 +115,6 @@ public class ExchangeDetailsActivity extends AppCompatActivity {
         if (detailsOfExchangeForm.getLastModifier().equals(principal)) {
             mAccept.setVisibility(View.INVISIBLE);
         }
-
-        RequesForCheckIsAllowedToQualify requesForCheckIsAllowedToQualify = new RequesForCheckIsAllowedToQualify();
-        requesForCheckIsAllowedToQualify.execute();
 
         final RequestForAcceptOrDenny requestForAcceptOrDenny = new RequestForAcceptOrDenny();
         mAccept.setOnClickListener(new View.OnClickListener() {
@@ -132,7 +134,9 @@ public class ExchangeDetailsActivity extends AppCompatActivity {
         mNegotiate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: Lanzar actividad negociar
+                Intent intent = new Intent(getApplicationContext(), NegotiateExchangeActivity.class);
+                intent.putExtra("detailsOfExchangeForm", detailsOfExchangeForm);
+                startActivity(intent);
             }
         });
 
@@ -268,7 +272,7 @@ public class ExchangeDetailsActivity extends AppCompatActivity {
         protected void onPostExecute(Boolean aBoolean) {
             if (aBoolean) {
                 mQualify.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 mQualify.setVisibility(View.INVISIBLE);
             }
         }

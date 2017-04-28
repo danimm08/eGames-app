@@ -41,6 +41,7 @@
             android:label="@string/title_activity_search"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.CreateExchangeActivity" />
+        <activity android:name=".activities.NegotiateExchangeActivity" />
         <activity
             android:name=".activities.UserDetailsActivity"
             android:label="@string/title_activity_user_details"

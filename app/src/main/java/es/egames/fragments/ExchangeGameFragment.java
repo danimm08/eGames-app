@@ -66,10 +66,10 @@ public class ExchangeGameFragment extends Fragment {
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
             List<SoughtItem> soughtItemList = new ArrayList<>();
-            MyGameDetailsFormRecyclerViewAdapter.RequestForImageTask requestForImageTask = new MyGameDetailsFormRecyclerViewAdapter.RequestForImageTask();
             for (PersonalGame pg : personalGames) {
                 SoughtItem soughtItem = SoughtItem.createFromGame(pg.getGame());
                 try {
+                    MyGameDetailsFormRecyclerViewAdapter.RequestForImageTask requestForImageTask = new MyGameDetailsFormRecyclerViewAdapter.RequestForImageTask();
                     soughtItem.setImage(requestForImageTask.execute(pg.getGame().getCoverUrl()).get());
                 } catch (InterruptedException | ExecutionException e) {
                     soughtItem.setImage(null);

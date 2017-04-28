@@ -11,7 +11,7 @@ import es.egames.model.Type;
 /**
  * Created by daniel on 9/03/17.
  */
-public class ExchangeForm  implements Serializable {
+public class ExchangeForm implements Serializable {
 
     private List<PersonalGame> personalGamesUser1;
     private List<PersonalGame> personalGamesUser2;
@@ -29,7 +29,10 @@ public class ExchangeForm  implements Serializable {
         this.type = type;
         this.wayExchange = wayExchange;
         List<Note> notes = new ArrayList<>();
-        notes.add(note);
+        if (note != null) {
+            notes.add(note);
+        }
+
         this.notes = notes;
     }
 

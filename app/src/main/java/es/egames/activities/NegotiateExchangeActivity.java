@@ -11,6 +11,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import es.egames.R;
+import es.egames.forms.DetailsOfExchangeForm;
 import es.egames.forms.ExchangeForm;
 import es.egames.model.Note;
 import es.egames.model.PersonalGame;
@@ -28,7 +30,7 @@ import es.egames.model.Type;
 import es.egames.utils.RestTemplateManager;
 import es.egames.widgets.MultiSelectionSpinner;
 
-public class CreateExchangeActivity extends AppCompatActivity {
+public class NegotiateExchangeActivity extends AppCompatActivity {
 
     private MultiSelectionSpinner mMyGames;
     private MultiSelectionSpinner mTheirGames;
@@ -36,16 +38,18 @@ public class CreateExchangeActivity extends AppCompatActivity {
     private EditText mWayExchange;
     private EditText mNote;
     private Button mMakeExchangeButton;
-    private PersonalGame personalGame;
-    private CreateExchangeActivity instance;
-    private ExchangeForm aux;
+
+    private NegotiateExchangeActivity instance;
+    private ExchangeForm exchangeFormWithAvailablesPersonalGames;
+    private ExchangeForm currentExchange;
+    private DetailsOfExchangeForm detailsOfExchangeForm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_exchange);
+        setContentView(R.layout.activity_negotiate_exchange);
         instance = this;
-        personalGame = (PersonalGame) getIntent().getSerializableExtra("personalgame");
+        detailsOfExchangeForm = (DetailsOfExchangeForm) getIntent().getSerializableExtra("detailsOfExchangeForm");
 
         mMyGames = (MultiSelectionSpinner) findViewById(R.id.spinner_my_games);
         mTheirGames = (MultiSelectionSpinner) findViewById(R.id.spinner_their_games);
@@ -53,82 +57,140 @@ public class CreateExchangeActivity extends AppCompatActivity {
         mWayExchange = (EditText) findViewById(R.id.exchange_way_exchange);
         mNote = (EditText) findViewById(R.id.exchange_note);
 
-        loadSpinners();
+        loadData();
 
         mMakeExchangeButton = (Button) findViewById(R.id.exchange_submit_exchange);
         mMakeExchangeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                requestForExchange();
+                requestForNegotiateExchange();
             }
         });
     }
 
-    private void loadSpinners() {
-        RequestForCreateExchange createExchangeTask = new RequestForCreateExchange();
+    private void loadData() {
+        RequestForCreateNegotiation createExchangeTask = new RequestForCreateNegotiation();
         try {
-            aux = createExchangeTask.execute(personalGame).get();
+            List<PersonalGame> personalGames = new ArrayList(detailsOfExchangeForm.getPersonalGameUser2());
+            PersonalGame auxPersonalGame = personalGames.get(0);
+            exchangeFormWithAvailablesPersonalGames = createExchangeTask.execute(auxPersonalGame).get();
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
+        RequestForGetExchangeFormInfo requestForGetExchangeFormInfo = new RequestForGetExchangeFormInfo();
+        try {
+            currentExchange = requestForGetExchangeFormInfo.execute().get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+
         List<String> myPersonalGamesToString = new ArrayList<>();
-        for (PersonalGame pg : aux.getPersonalGamesUser1()) {
+        for (PersonalGame pg : exchangeFormWithAvailablesPersonalGames.getPersonalGamesUser1()) {
             myPersonalGamesToString.add(pg.getGame().getTitle() + " " + "(" + pg.getGame().getPlatform().getName() + ")");
         }
         List<String> theirPersonalGamesToString = new ArrayList<>();
-        for (PersonalGame pg : aux.getPersonalGamesUser2()) {
-            if(pg.getId()==personalGame.getId()){
-                personalGame = pg;
-            }
+        for (PersonalGame pg : exchangeFormWithAvailablesPersonalGames.getPersonalGamesUser2()) {
             theirPersonalGamesToString.add(pg.getGame().getTitle() + " " + "(" + pg.getGame().getPlatform().getName() + ")");
         }
+
         if (myPersonalGamesToString.size() > 0) {
             mMyGames.setItems(myPersonalGamesToString);
-            mMyGames.setSelection(0);
         }
         if (theirPersonalGamesToString.size() > 0) {
             mTheirGames.setItems(theirPersonalGamesToString);
-            mTheirGames.setSelection(0);
-            mTheirGames.setSelection(theirPersonalGamesToString.indexOf(personalGame.getGame().getTitle() + " " + "(" + personalGame.getGame().getPlatform().getName() + ")"));
         }
+
+        List<String> selectedIndicesMyGames = new ArrayList<>();
+        for (PersonalGame pg : currentExchange.getPersonalGamesUser1()) {
+            if (myPersonalGamesToString.contains(pg.getGame().getTitle() + " " + "(" + pg.getGame().getPlatform().getName() + ")")) {
+                selectedIndicesMyGames.add(pg.getGame().getTitle() + " " + "(" + pg.getGame().getPlatform().getName() + ")");
+            }
+        }
+        mMyGames.setSelection(selectedIndicesMyGames);
+
+        List<String> selectedIndicesTheirGames = new ArrayList<>();
+        for (PersonalGame pg : currentExchange.getPersonalGamesUser2()) {
+            if (theirPersonalGamesToString.contains(pg.getGame().getTitle() + " " + "(" + pg.getGame().getPlatform().getName() + ")")) {
+                selectedIndicesTheirGames.add(pg.getGame().getTitle() + " " + "(" + pg.getGame().getPlatform().getName() + ")");
+            }
+        }
+        mTheirGames.setSelection(selectedIndicesTheirGames);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.type, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mType.setAdapter(adapter);
 
+        if (currentExchange.getType().equals(Type.Fijo)) {
+            mType.setSelection(0);
+        } else {
+            mType.setSelection(1);
+        }
+
+        mWayExchange.setText(currentExchange.getWayExchange());
+
     }
 
-    private void requestForExchange() {
+    private void requestForNegotiateExchange() {
 
         List<PersonalGame> personalGameUser1 = new ArrayList<>();
         for (Integer i : mMyGames.getSelectedIndicies()) {
-            personalGameUser1.add(aux.getPersonalGamesUser1().get(i));
+            personalGameUser1.add(exchangeFormWithAvailablesPersonalGames.getPersonalGamesUser1().get(i));
         }
         List<PersonalGame> personalGameUser2 = new ArrayList<>();
         for (Integer i : mTheirGames.getSelectedIndicies()) {
-            personalGameUser2.add(aux.getPersonalGamesUser2().get(i));
+            personalGameUser2.add(exchangeFormWithAvailablesPersonalGames.getPersonalGamesUser2().get(i));
         }
         String auxType = (String) mType.getSelectedItem();
         Type type = auxType.equals("Fijo") ? Type.Fijo : Type.Temporal;
 
         String wayExchange = mWayExchange.getText().toString();
-        Note note = new Note();
-        note.setText(mNote.getText().toString());
+        Note note;
+        if (mNote.getText().toString().isEmpty()) {
+            note = null;
+        } else {
+            note = new Note();
+            note.setText(mNote.getText().toString());
+        }
 
         ExchangeForm exchangeForm = new ExchangeForm(personalGameUser1, personalGameUser2, type, wayExchange, note);
+
         RequestForExchange requestForExchange = new RequestForExchange();
         requestForExchange.execute(exchangeForm);
+
+
     }
 
-    public class RequestForCreateExchange extends AsyncTask<PersonalGame, Void, ExchangeForm> {
+    public class RequestForCreateNegotiation extends AsyncTask<PersonalGame, Void, ExchangeForm> {
 
         @Override
         protected ExchangeForm doInBackground(PersonalGame... params) {
             ExchangeForm res = null;
             RestTemplate restTemplate = RestTemplateManager.create();
             HttpEntity headers = RestTemplateManager.authenticateRequest(instance);
-            String url = RestTemplateManager.getUrl(instance, "exchange/create?personalGameId=" + params[0].getId());
+            String url = RestTemplateManager.getUrl(instance, "exchange/createNegotiation?exchangeId=" + detailsOfExchangeForm.getId());
+            try {
+                ResponseEntity<ExchangeForm> responseEntity = restTemplate.exchange(url, HttpMethod.GET, headers, ExchangeForm.class);
+                if (responseEntity.getStatusCode().equals(HttpStatus.OK)) {
+                    res = responseEntity.getBody();
+                } else {
+                    res = null;
+                }
+            } catch (Exception e) {
+                res = null;
+            }
+            return res;
+        }
+    }
+
+    public class RequestForGetExchangeFormInfo extends AsyncTask<PersonalGame, Void, ExchangeForm> {
+
+        @Override
+        protected ExchangeForm doInBackground(PersonalGame... params) {
+            ExchangeForm res = null;
+            RestTemplate restTemplate = RestTemplateManager.create();
+            HttpEntity headers = RestTemplateManager.authenticateRequest(instance);
+            String url = RestTemplateManager.getUrl(instance, "exchange/getExchangeFormInfo?exchangeId=" + detailsOfExchangeForm.getId());
             try {
                 ResponseEntity<ExchangeForm> responseEntity = restTemplate.exchange(url, HttpMethod.GET, headers, ExchangeForm.class);
                 if (responseEntity.getStatusCode().equals(HttpStatus.OK)) {
@@ -150,11 +212,9 @@ public class CreateExchangeActivity extends AppCompatActivity {
             Boolean hasErrors;
             RestTemplate restTemplate = RestTemplateManager.create();
             HttpEntity httpEntity = RestTemplateManager.authenticateRequestWithObject(instance, params[0]);
-
-            String url = RestTemplateManager.getUrl(instance, "exchange/save");
+            String url = RestTemplateManager.getUrl(instance, "exchange/negotiate?exchangeId=" + detailsOfExchangeForm.getId());
             try {
                 ResponseEntity<Object> responseEntity = restTemplate.exchange(url, HttpMethod.POST, httpEntity, Object.class);
-                System.out.println("Breakpoint");
                 if (responseEntity.getStatusCode().equals(HttpStatus.OK)) {
                     hasErrors = false;
                 } else {
@@ -172,6 +232,7 @@ public class CreateExchangeActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(getApplicationContext(), R.string.error_general, Toast.LENGTH_LONG);
                 toast.show();
             } else {
+                Toast.makeText(getApplicationContext(), "Enviar a actividad, éxito", Toast.LENGTH_LONG).show();
                 //TODO: Enviar a main activity
 //                ExchangeFragment myExchangesFragment = new ExchangeFragment();
 //                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

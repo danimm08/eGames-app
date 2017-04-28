@@ -1,5 +1,5 @@
 <resources>
-    <string name="ip_server" translatable="false">http://192.168.1.134:8080/api/</string>
+    <string name="ip_server" translatable="false">http://192.168.1.40:8080/api/</string>
     <string name="app_name">eGames</string>
     <string name="title_activity_login">Sign in</string>
 
@@ -169,4 +169,5 @@
     <string name="on">on</string>
     <string name="details_exchange">Details of exchange</string>
     <string name="qualify">Qualify</string>
+    <string name="exchange_negotiate_exchange">Negotiate exchange</string>
 </resources>
