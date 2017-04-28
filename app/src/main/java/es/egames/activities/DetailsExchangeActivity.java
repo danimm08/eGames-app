@@ -29,7 +29,7 @@ import es.egames.model.PersonalGame;
 import es.egames.model.User;
 import es.egames.utils.RestTemplateManager;
 
-public class ExchangeDetailsActivity extends AppCompatActivity {
+public class DetailsExchangeActivity extends AppCompatActivity {
 
     private DetailsOfExchangeForm detailsOfExchangeForm;
     public User principal;
@@ -143,7 +143,9 @@ public class ExchangeDetailsActivity extends AppCompatActivity {
         mQualify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: Lanzar actividad para calificar
+                Intent intent = new Intent(getApplicationContext(),QualifyExchangeActivity.class);
+                intent.putExtra("detailsOfExchangeForm", detailsOfExchangeForm);
+                startActivity(intent);
             }
         });
 

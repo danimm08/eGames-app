@@ -170,4 +170,7 @@
     <string name="details_exchange">Details of exchange</string>
     <string name="qualify">Qualify</string>
     <string name="exchange_negotiate_exchange">Negotiate exchange</string>
+    <string name="title_activity_qualify_exchange">QualifyExchange</string>
+    <string name="text">Text</string>
+    <string name="rating">Rating</string>
 </resources>

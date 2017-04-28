@@ -47,8 +47,12 @@
             android:label="@string/title_activity_user_details"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.ExchangeDetailsActivity"
+            android:name=".activities.DetailsExchangeActivity"
             android:label="@string/title_activity_exchange_details"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.QualifyExchangeActivity"
+            android:label="@string/title_activity_qualify_exchange"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
