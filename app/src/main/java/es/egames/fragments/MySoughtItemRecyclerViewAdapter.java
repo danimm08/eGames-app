@@ -72,8 +72,8 @@ public class MySoughtItemRecyclerViewAdapter extends RecyclerView.Adapter<MySoug
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mImageView = (ImageView) view.findViewById(R.id.image);
-            mFieldOneView = (TextView) view.findViewById(R.id.fieldone);
+            mImageView = (ImageView) view.findViewById(R.id.chat_image);
+            mFieldOneView = (TextView) view.findViewById(R.id.chat_username);
             mFieldTwoView = (TextView) view.findViewById(R.id.fieldtwo);
             mFieldThreeView = (TextView) view.findViewById(R.id.fieldthree);
             mFieldFourView = (TextView) view.findViewById(R.id.fieldfour);

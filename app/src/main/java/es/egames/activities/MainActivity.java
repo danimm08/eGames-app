@@ -4,6 +4,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -18,6 +20,10 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -25,29 +31,38 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.concurrent.ExecutionException;
 
 import es.egames.R;
 import es.egames.forms.DetailsOfExchangeForm;
 import es.egames.forms.GameDetailsForm;
+import es.egames.fragments.ChatFragment;
 import es.egames.fragments.ExchangeFragment;
 import es.egames.fragments.GameDetailsFormList;
 import es.egames.fragments.GameTabsFragment;
+import es.egames.fragments.MyChatRecyclerViewAdapter;
 import es.egames.model.User;
 import es.egames.utils.RestTemplateManager;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, GameDetailsFormList.OnListFragmentInteractionListener, ExchangeFragment.OnListFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, GameDetailsFormList.OnListFragmentInteractionListener, ExchangeFragment.OnListFragmentInteractionListener, ChatFragment.OnListFragmentInteractionListener {
 
     private Fragment gameTabsFragment;
     private Fragment myExchangesFragment;
+    private Fragment chatsFragment;
     private SearchView searchView;
     private User principal;
+    private ImageView mImageView;
+    private TextView mNameView;
+    private TextView mUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         checkIsLoggedIn();
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -65,7 +80,44 @@ public class MainActivity extends AppCompatActivity
         gameTabsFragment = new GameTabsFragment();
         fragmentManager.beginTransaction().replace(R.id.content_main, gameTabsFragment).commit();
 
+//        View headerView = navigationView.inflateHeaderView(R.layout.nav_header_main);
+
+
+        View hView =  navigationView.getHeaderView(0);
+
+        mImageView = (ImageView) hView.findViewById(R.id.header_image);
+        mNameView = (TextView) hView.findViewById(R.id.header_name);
+        mUsername = (TextView) hView.findViewById(R.id.header_username);
+
+        modifyInfo();
+
         redirect();
+    }
+
+    private void modifyInfo() {
+        RequestForPrincipalDetailsTask requestForPrincipalDetailsTask = new RequestForPrincipalDetailsTask();
+        try {
+            principal = requestForPrincipalDetailsTask.execute().get();
+        } catch (InterruptedException | ExecutionException e) {
+            principal = null;
+        }
+
+        mNameView.setText(principal.getName() + " " + principal.getSurname());
+        mUsername.setText(principal.getUserAccount().getUsername());
+        RequestForImageTask requestForImageTask = new RequestForImageTask();
+        try {
+            Bitmap image;
+            image = requestForImageTask.execute(principal.getProfilePicture()).get();
+            if (image != null) {
+                mImageView.setImageBitmap(image);
+            } else {
+                mImageView.setImageResource(R.drawable.default_image);
+            }
+
+        } catch (InterruptedException | ExecutionException e) {
+            mImageView.setImageResource(R.drawable.default_image);
+        }
+
     }
 
     private void redirect() {
@@ -160,13 +212,21 @@ public class MainActivity extends AppCompatActivity
             transaction.addToBackStack(null);
             transaction.commit();
         } else if (id == R.id.chats) {
-            fragmentManager.beginTransaction().replace(R.id.content_main, new Fragment()).commit();
+            if (chatsFragment == null) {
+                chatsFragment = new ChatFragment();
+            }
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.content_main, chatsFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
         } else if (id == R.id.my_profile) {
-            RequestForPrincipalDetailsTask requestForPrincipalDetailsTask = new RequestForPrincipalDetailsTask();
-            try {
-                principal = requestForPrincipalDetailsTask.execute().get();
-            } catch (InterruptedException | ExecutionException e) {
-                principal = null;
+            if (principal == null) {
+                RequestForPrincipalDetailsTask requestForPrincipalDetailsTask = new RequestForPrincipalDetailsTask();
+                try {
+                    principal = requestForPrincipalDetailsTask.execute().get();
+                } catch (InterruptedException | ExecutionException e) {
+                    principal = null;
+                }
             }
             Intent intent = new Intent(getApplicationContext(), DetailsUserActivity.class);
             intent.putExtra("user", principal);
@@ -204,6 +264,12 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent(this, DetailsExchangeActivity.class);
         intent.putExtra("detailsOfExchangeForm", item);
         startActivity(intent);
+    }
+
+    @Override
+    public void onListFragmentInteraction(User item) {
+        //TODO: Llevar a chat
+        Toast.makeText(getApplicationContext(), item.getName(), Toast.LENGTH_LONG).show();
     }
 
     public class RequestForPrincipalDetailsTask extends AsyncTask<Void, Void, User> {
@@ -253,5 +319,20 @@ public class MainActivity extends AppCompatActivity
             return null;
         }
 
+    }
+
+    public class RequestForImageTask extends AsyncTask<String, Void, Bitmap> {
+
+        @Override
+        protected Bitmap doInBackground(String... params) {
+            Bitmap bmp = null;
+            try {
+                String auxUrl = RestTemplateManager.getUrl(getApplicationContext(), "image/download?filename=" + URLEncoder.encode(params[0], "UTF-8").toString());
+                URLConnection connection = RestTemplateManager.getConnection(getApplicationContext(), auxUrl);
+                bmp = BitmapFactory.decodeStream(connection.getInputStream());
+            } catch (Exception e) {
+            }
+            return bmp;
+        }
     }
 }
