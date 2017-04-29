@@ -11,25 +11,21 @@
             android:icon="@drawable/ic_exchange_arrow_white_24dp"
             android:title="@string/my_exchanges" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/chats"
+            android:icon="@drawable/ic_chat_black_24dp"
+            android:title="@string/chats" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/user_account">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/my_profile"
+                android:icon="@drawable/ic_account_circle_black_24dp"
+                android:title="@string/my_profile" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/logout"
+                android:icon="@drawable/ic_highlight_off_black_24dp"
+                android:title="@string/logout" />
         </menu>
     </item>
 

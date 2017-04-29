@@ -143,4 +143,11 @@ public class RestTemplateManager {
         }
         return token;
     }
+
+    public static void logout(Object activityOrContext) {
+        SharedPreferences sharedPref = getSharedPreferences(activityOrContext);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.remove("access_token");
+        editor.commit();
+    }
 }

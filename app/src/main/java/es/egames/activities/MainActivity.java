@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -18,12 +19,22 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.concurrent.ExecutionException;
+
 import es.egames.R;
 import es.egames.forms.DetailsOfExchangeForm;
 import es.egames.forms.GameDetailsForm;
 import es.egames.fragments.ExchangeFragment;
 import es.egames.fragments.GameDetailsFormList;
 import es.egames.fragments.GameTabsFragment;
+import es.egames.model.User;
+import es.egames.utils.RestTemplateManager;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, GameDetailsFormList.OnListFragmentInteractionListener, ExchangeFragment.OnListFragmentInteractionListener {
@@ -31,6 +42,7 @@ public class MainActivity extends AppCompatActivity
     private Fragment gameTabsFragment;
     private Fragment myExchangesFragment;
     private SearchView searchView;
+    private User principal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,14 +159,21 @@ public class MainActivity extends AppCompatActivity
             transaction.replace(R.id.content_main, myExchangesFragment);
             transaction.addToBackStack(null);
             transaction.commit();
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.chats) {
             fragmentManager.beginTransaction().replace(R.id.content_main, new Fragment()).commit();
-        } else if (id == R.id.nav_manage) {
-            fragmentManager.beginTransaction().replace(R.id.content_main, new Fragment()).commit();
-        } else if (id == R.id.nav_share) {
-            fragmentManager.beginTransaction().replace(R.id.content_main, new Fragment()).commit();
-        } else if (id == R.id.nav_send) {
-            fragmentManager.beginTransaction().replace(R.id.content_main, new Fragment()).commit();
+        } else if (id == R.id.my_profile) {
+            RequestForPrincipalDetailsTask requestForPrincipalDetailsTask = new RequestForPrincipalDetailsTask();
+            try {
+                principal = requestForPrincipalDetailsTask.execute().get();
+            } catch (InterruptedException | ExecutionException e) {
+                principal = null;
+            }
+            Intent intent = new Intent(getApplicationContext(), DetailsUserActivity.class);
+            intent.putExtra("user", principal);
+            startActivity(intent);
+        } else if (id == R.id.logout) {
+            RequestForLogout requestForLogout = new RequestForLogout();
+            requestForLogout.execute();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -185,5 +204,54 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent(this, DetailsExchangeActivity.class);
         intent.putExtra("detailsOfExchangeForm", item);
         startActivity(intent);
+    }
+
+    public class RequestForPrincipalDetailsTask extends AsyncTask<Void, Void, User> {
+
+
+        public RequestForPrincipalDetailsTask() {
+            super();
+        }
+
+        @Override
+        protected User doInBackground(Void... params) {
+            RestTemplate restTemplate = RestTemplateManager.create();
+            HttpEntity headers = RestTemplateManager.authenticateRequest(getApplicationContext());
+            String url = RestTemplateManager.getUrl(getApplicationContext(), "user/principal");
+            User u = null;
+            ResponseEntity<User> responseEntity;
+            try {
+                responseEntity = restTemplate.exchange(url, HttpMethod.GET, headers, User.class);
+                if (responseEntity.getStatusCode().equals(HttpStatus.OK)) {
+                    u = responseEntity.getBody();
+                }
+            } catch (Exception oops) {
+                u = null;
+            }
+            return u;
+        }
+    }
+
+    public class RequestForLogout extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            RestTemplate restTemplate = RestTemplateManager.create();
+            HttpEntity headers = RestTemplateManager.authenticateRequest(getApplicationContext());
+            String url = RestTemplateManager.getUrl(getApplicationContext(), "oauth/logout");
+            ResponseEntity<Void> responseEntity;
+            try {
+                responseEntity = restTemplate.exchange(url, HttpMethod.GET, headers, Void.class);
+                if (responseEntity.getStatusCode().equals(HttpStatus.OK)) {
+                    RestTemplateManager.logout(getApplicationContext());
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    finish();
+                    startActivity(intent);
+                }
+            } catch (Exception oops) {
+            }
+            return null;
+        }
+
     }
 }

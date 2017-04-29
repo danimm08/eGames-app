@@ -138,7 +138,7 @@ public class PersonalGameDetailsActivity extends AppCompatActivity implements Im
                             .setMultipartFile("image", file).asJsonObject().setCallback(new FutureCallback<JsonObject>() {
                         @Override
                         public void onCompleted(Exception e, JsonObject result) {
-                            if (result==null) {
+                            if (result == null) {
                                 Intent intent = new Intent(getApplicationContext(), PersonalGameDetailsActivity.class);
                                 intent.putExtra("game", gameDetailsForm);
                                 RequestForPersonalGameDetails requestForPersonalGameDetails = new RequestForPersonalGameDetails();
@@ -181,16 +181,6 @@ public class PersonalGameDetailsActivity extends AppCompatActivity implements Im
         fos.flush();
         fos.close();
         return f;
-    }
-
-    public String getPath(Uri uri) {
-        String[] filePathColumn = {MediaStore.Images.Media.DATA};
-        Cursor cursor = getApplicationContext().getContentResolver().query(uri, filePathColumn, null, null, null);
-        cursor.moveToFirst();
-        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-        String filePath = cursor.getString(columnIndex);
-        cursor.close();
-        return filePath;
     }
 
     public class RequestForPrincipalDetailsTask extends AsyncTask<Void, Void, User> {

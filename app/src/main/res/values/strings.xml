@@ -179,4 +179,7 @@
     <string name="description">Description</string>
     <string name="create_personal_game">Create personal game</string>
     <string name="error_upload_image">An error has occurred. Make sure the image size is less than 5MB and the format is png or jpg</string>
+    <string name="logout">Logout</string>
+    <string name="my_profile">My profile</string>
+    <string name="chats">Chats</string>
 </resources>
