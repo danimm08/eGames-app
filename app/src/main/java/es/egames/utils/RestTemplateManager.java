@@ -130,4 +130,17 @@ public class RestTemplateManager {
         }
         return sharedPref;
     }
+
+    public static String getToken(Object activityOrContext) {
+        String token;
+        SharedPreferences sharedPref = getSharedPreferences(activityOrContext);
+        String access_token = sharedPref.getString("access_token", null);
+
+        if (access_token != null) {
+            token = access_token;
+        } else {
+            token = null;
+        }
+        return token;
+    }
 }
