@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -131,6 +132,16 @@ public class DetailsUserActivity extends AppCompatActivity implements SoughtItem
             userAction.setText(R.string.follow);
             userAction.setOnClickListener(followOrUnfollow);
         }
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), CreateMessgeActivity.class);
+                intent.putExtra("user", user);
+                startActivity(intent);
+            }
+        });
 
     }
 

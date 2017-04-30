@@ -62,6 +62,11 @@
         <activity
             android:name=".activities.MessageActivity"
             android:label="@string/title_activity_chat"
+            android:launchMode = "singleInstance"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.CreateMessgeActivity"
+            android:label="@string/title_activity_create_messge"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
