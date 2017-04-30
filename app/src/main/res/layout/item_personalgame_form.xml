@@ -18,7 +18,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/note_username"
+            android:id="@+id/message_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/md_keylines"
@@ -33,7 +33,7 @@
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/note_username"
+            android:layout_alignRight="@+id/message_date"
             android:layout_marginBottom="@dimen/md_keylines"
             android:layout_marginEnd="16dp"
             android:layout_marginLeft="@dimen/md_keylines"
@@ -41,21 +41,21 @@
             android:numStars="5" />
 
         <TextView
-            android:id="@+id/note_date"
+            android:id="@+id/message_sender"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/note_username"
+            android:layout_below="@+id/message_date"
 
             android:layout_marginLeft="@dimen/md_keylines"
 
             />
 
         <TextView
-            android:id="@+id/item_exchange_their_games_description"
+            android:id="@+id/message_text"
             android:layout_width="165dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/note_username"
-            android:layout_toEndOf="@+id/note_date"
+            android:layout_below="@+id/message_date"
+            android:layout_toEndOf="@+id/message_sender"
             android:paddingEnd="16dp"
             android:textAlignment="viewEnd" />
 
@@ -63,10 +63,10 @@
             android:id="@+id/item_exchange_their_games_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/note_username"
+            android:layout_below="@+id/message_date"
             android:layout_marginEnd="16dp"
 
-            android:layout_toRightOf="@+id/item_exchange_their_games_description"
+            android:layout_toRightOf="@+id/message_text"
             android:text="5"
             android:textColor="@color/colorPrimary" />
 

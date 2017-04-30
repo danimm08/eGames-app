@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity
 //        View headerView = navigationView.inflateHeaderView(R.layout.nav_header_main);
 
 
-        View hView =  navigationView.getHeaderView(0);
+        View hView = navigationView.getHeaderView(0);
 
         mImageView = (ImageView) hView.findViewById(R.id.header_image);
         mNameView = (TextView) hView.findViewById(R.id.header_name);
@@ -268,8 +268,9 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onListFragmentInteraction(User item) {
-        //TODO: Llevar a chat
-        Toast.makeText(getApplicationContext(), item.getName(), Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(getApplicationContext(), MessageActivity.class);
+        intent.putExtra("user", item);
+        startActivity(intent);
     }
 
     public class RequestForPrincipalDetailsTask extends AsyncTask<Void, Void, User> {

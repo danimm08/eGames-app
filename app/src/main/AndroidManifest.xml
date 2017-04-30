@@ -58,6 +58,10 @@
         <activity
             android:name=".activities.CreatePersonalGameActivity"
             android:label="@string/title_activity_create_personal_game"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.MessageActivity"
+            android:label="@string/title_activity_chat"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

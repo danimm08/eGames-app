@@ -107,9 +107,9 @@ public class MyExchangeRecyclerViewAdapter extends RecyclerView.Adapter<MyExchan
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mDateView = (TextView) view.findViewById(R.id.note_username);
+            mDateView = (TextView) view.findViewById(R.id.message_date);
             mStateButton = (Button) view.findViewById(R.id.exchange_state);
-            mUsername = (TextView) view.findViewById(R.id.note_date);
+            mUsername = (TextView) view.findViewById(R.id.message_sender);
             mTheirExchanges = (TextView) view.findViewById(R.id.item_exchange_their_games_content);
             mMyExchanges = (TextView) view.findViewById(R.id.item_exchange_my_games_content);
 
