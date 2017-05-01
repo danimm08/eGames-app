@@ -39,7 +39,7 @@ public class DetailsUserActivity extends AppCompatActivity implements SoughtItem
     private User principal;
     private User auxUser;
     public User user;
-    private DetailsUserActivity instance;
+    public static DetailsUserActivity instance;
     private ImageView userImage;
     private TextView userName;
     private TextView userUserName;
@@ -124,7 +124,15 @@ public class DetailsUserActivity extends AppCompatActivity implements SoughtItem
 
         if (principal.getId() == user.getId()) {
             userAction.setText(R.string.edit_info);
-            //TODO: Mandar a la actividad para modificar la información
+            userAction.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplicationContext(), ModifyPersonalData.class);
+                    intent.putExtra("user", user);
+                    startActivity(intent);
+                }
+            });
+
         } else if (principal.getFollowees().contains(user)) {
             userAction.setText(R.string.unfollow);
             userAction.setOnClickListener(followOrUnfollow);
@@ -134,15 +142,19 @@ public class DetailsUserActivity extends AppCompatActivity implements SoughtItem
         }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), CreateMessgeActivity.class);
-                intent.putExtra("user", user);
-                startActivity(intent);
-            }
-        });
+        if (principal.getId() == user.getId()) {
+            fab.setVisibility(View.GONE);
+        } else {
 
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getApplicationContext(), CreateMessgeActivity.class);
+                    intent.putExtra("user", user);
+                    startActivity(intent);
+                }
+            });
+        }
     }
 
     @Override

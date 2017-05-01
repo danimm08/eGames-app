@@ -188,4 +188,9 @@
     <string name="send">Send</string>
     <string name="message">Message</string>
     <string name="send_message">Send a message</string>
+    <string name="current_password">Current password</string>
+    <string name="modify_info">Modify personal data</string>
+    <string name="error_personaldata">There was an error modifying your personal information</string>
+    <string name="error_userAccount">An error occurred modifying your user account</string>
+    <string name="error_userAccount_remmind">Remember that to change the account information, the current password is required</string>
 </resources>

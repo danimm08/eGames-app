@@ -23,7 +23,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -42,7 +41,6 @@ import es.egames.fragments.ChatFragment;
 import es.egames.fragments.ExchangeFragment;
 import es.egames.fragments.GameDetailsFormList;
 import es.egames.fragments.GameTabsFragment;
-import es.egames.fragments.MyChatRecyclerViewAdapter;
 import es.egames.model.User;
 import es.egames.utils.RestTemplateManager;
 
@@ -102,22 +100,23 @@ public class MainActivity extends AppCompatActivity
             principal = null;
         }
 
-        mNameView.setText(principal.getName() + " " + principal.getSurname());
-        mUsername.setText(principal.getUserAccount().getUsername());
-        RequestForImageTask requestForImageTask = new RequestForImageTask();
-        try {
-            Bitmap image;
-            image = requestForImageTask.execute(principal.getProfilePicture()).get();
-            if (image != null) {
-                mImageView.setImageBitmap(image);
-            } else {
+        if (principal != null) {
+            mNameView.setText(principal.getName() + " " + principal.getSurname());
+            mUsername.setText(principal.getUserAccount().getUsername());
+            RequestForImageTask requestForImageTask = new RequestForImageTask();
+            try {
+                Bitmap image;
+                image = requestForImageTask.execute(principal.getProfilePicture()).get();
+                if (image != null) {
+                    mImageView.setImageBitmap(image);
+                } else {
+                    mImageView.setImageResource(R.drawable.default_image);
+                }
+
+            } catch (InterruptedException | ExecutionException e) {
                 mImageView.setImageResource(R.drawable.default_image);
             }
-
-        } catch (InterruptedException | ExecutionException e) {
-            mImageView.setImageResource(R.drawable.default_image);
         }
-
     }
 
     private void redirect() {
@@ -247,6 +246,7 @@ public class MainActivity extends AppCompatActivity
         String access_token = sharedPref.getString("access_token", null);
         if (access_token == null) {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            finish();
             startActivity(intent);
         }
     }
