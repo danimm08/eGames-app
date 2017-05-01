@@ -1,11 +1,9 @@
 package es.egames.fragments;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,18 +16,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import es.egames.R;
-import es.egames.activities.MessageActivity;
-import es.egames.fragments.dummy.DummyContent;
-import es.egames.fragments.dummy.DummyContent.DummyItem;
-import es.egames.model.Message;
-import es.egames.model.User;
-import es.egames.utils.RestTemplateManager;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+
+import es.egames.R;
+import es.egames.model.Message;
+import es.egames.model.User;
+import es.egames.utils.RestTemplateManager;
 
 public class MessageFragment extends Fragment {
 

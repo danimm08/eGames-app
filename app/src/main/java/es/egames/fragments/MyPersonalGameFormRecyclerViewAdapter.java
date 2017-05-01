@@ -36,8 +36,7 @@ public class MyPersonalGameFormRecyclerViewAdapter extends RecyclerView.Adapter<
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mPersonalGame = mValues.get(position);
         holder.mUsername.setText(mValues.get(position).getUser().getUserAccount().getUsername());
-        Double auxRating = (mValues.get(position).getUser().getReputation() * 5) / 10;
-        Long rating = Math.round(auxRating);
+        Float rating = new Float(mValues.get(position).getUser().getReputation());
         holder.mRatingbar.setRating(rating);
         holder.mType.setText(mValues.get(position).getType().toString());
         if(!isDistance){

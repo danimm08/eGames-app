@@ -139,7 +139,7 @@ public class ModifyPersonalData extends AppCompatActivity {
                         errors.add(R.string.error_userAccount);
                         errors.add(R.string.error_userAccount_remmind);
                     } else {
-                        Map<String, Boolean> res = (Map<String, Boolean>) responseEntity.getBody(); //REMINDME: No pilla bien el boolean, cuando lo pille, debería ser indicativo de lo que tengo que hacer.
+                        Map<String, Boolean> res = (Map<String, Boolean>) responseEntity.getBody();
                         flag = res.get("result");
                         if (res.get("result")) {
                             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);

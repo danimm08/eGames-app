@@ -34,7 +34,7 @@ public class MyQualificationRecyclerViewAdapter extends RecyclerView.Adapter<MyQ
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        Float mark = new Float((mValues.get(position).getMark() * 5) / 10);
+        Float mark = new Float(mValues.get(position).getMark());
         holder.mRating.setRating(mark);
         holder.mUsername.setText(mValues.get(position).getUser().getUserAccount().getUsername());
         holder.mText.setText(mValues.get(position).getText());

@@ -61,8 +61,7 @@ public class QualifyExchangeActivity extends AppCompatActivity {
     private void requestForQualify() {
         QualificationForm qualificationForm = new QualificationForm();
         qualificationForm.setText(mText.getText().toString());
-        Double auxRating = new Double(mRatingBar.getRating() * 5) / 10;
-        Double rating = new Double(Math.round(auxRating));
+        Double rating = new Double(mRatingBar.getRating());
         qualificationForm.setMark(rating);
         RequestForQualify requestForQualify = new RequestForQualify();
         requestForQualify.execute(qualificationForm);

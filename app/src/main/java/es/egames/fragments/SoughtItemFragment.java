@@ -44,13 +44,14 @@ import java.util.concurrent.ExecutionException;
  */
 public class SoughtItemFragment extends Fragment {
 
-    private static final String MODE = "mode";
+    public static final String MODE = "mode";
     private static final String AUXOBJECT = "auxObject";
     private int mColumnCount = 1;
     private String mode;
     private Object auxObject;
     private List<SoughtItem> items;
     private OnListFragmentInteractionListener mListener;
+    public static MySoughtItemRecyclerViewAdapter adapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -78,7 +79,7 @@ public class SoughtItemFragment extends Fragment {
         if (getArguments() != null) {
             mode = getArguments().getString(MODE);
             auxObject = getArguments().getString(AUXOBJECT);
-            if(auxObject==null){
+            if (auxObject == null) {
                 auxObject = getArguments().getSerializable(AUXOBJECT);
             }
         }
@@ -105,11 +106,25 @@ public class SoughtItemFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MySoughtItemRecyclerViewAdapter(items, mListener));
+            adapter = new MySoughtItemRecyclerViewAdapter(items, mListener);
+            recyclerView.setAdapter(adapter);
         }
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mode != null && mode == "personalgames") {
+            RequestForSearchTask task = new RequestForSearchTask();
+            try {
+                items = task.execute().get();
+            } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
+            adapter.setItems(items);
+        }
+    }
 
     @Override
     public void onAttach(Context context) {

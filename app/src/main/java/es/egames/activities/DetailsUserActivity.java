@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -39,6 +40,7 @@ import es.egames.R;
 import es.egames.forms.GameDetailsForm;
 import es.egames.forms.SoughtItem;
 import es.egames.fragments.SoughtItemFragment;
+import es.egames.fragments.UserDetailsActivityFragment;
 import es.egames.model.Game;
 import es.egames.model.PersonalGame;
 import es.egames.model.User;
@@ -115,8 +117,7 @@ public class DetailsUserActivity extends AppCompatActivity implements SoughtItem
 
         userName.setText(user.getName() + " " + user.getSurname());
         userUserName.setText(user.getUserAccount().getUsername());
-        Double auxRating = (user.getReputation() * 5) / 10;
-        Long rating = Math.round(auxRating);
+        Float rating = new Float(user.getReputation());
         userRating.setRating(rating);
         userExchanges.setText(user.getnExchanges() + " " + getString(R.string.exchanges));
 
@@ -133,10 +134,13 @@ public class DetailsUserActivity extends AppCompatActivity implements SoughtItem
                 if (hasErrors) {
                     Toast.makeText(getApplicationContext(), R.string.error_follow, Toast.LENGTH_LONG);
                 } else {
+                    SoughtItemFragment followersFragment = (SoughtItemFragment) UserDetailsActivityFragment.adapter.getItem(1);
                     if (userAction.getText().toString().equals(getString(R.string.follow))) {
                         userAction.setText(R.string.unfollow);
+                        followersFragment.adapter.addItem(SoughtItem.createFromUser(principal)); //TODO: Comprobar en el backend seguir y dejar de seguir
                     } else {
                         userAction.setText(R.string.follow);
+                        followersFragment.adapter.removeItem(SoughtItem.createFromUser(principal)); //TODO: Eliminar correctamente
                     }
                 }
             }

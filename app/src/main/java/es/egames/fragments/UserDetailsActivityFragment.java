@@ -15,7 +15,7 @@ import es.egames.model.User;
 
 public class UserDetailsActivityFragment extends Fragment {
 
-    public TabsAdapter adapter;
+    public static TabsAdapter adapter;
 
     public UserDetailsActivityFragment() {
     }
@@ -23,7 +23,7 @@ public class UserDetailsActivityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_user_details, container, false);
+        View view = inflater.inflate(R.layout.fragment_user_details, container, false);
 
         adapter = new TabsAdapter(getFragmentManager());
 
@@ -38,10 +38,10 @@ public class UserDetailsActivityFragment extends Fragment {
     private void setupViewPager(ViewPager viewPager) {
         DetailsUserActivity activity = (DetailsUserActivity) getActivity();
         User u = activity.user;
-        adapter.addFragment(SoughtItemFragment.newInstance("personalgames",u), getString(R.string.personal_games));
-        adapter.addFragment(SoughtItemFragment.newInstance("followers",u), getString(R.string.followers));
-        adapter.addFragment(SoughtItemFragment.newInstance("followees",u), getString(R.string.followees));
-        adapter.addFragment(QualificationFragment.newInstance(u) ,getString(R.string.qualifications));
+        adapter.addFragment(SoughtItemFragment.newInstance("personalgames", u), getString(R.string.personal_games));
+        adapter.addFragment(SoughtItemFragment.newInstance("followers", u), getString(R.string.followers));
+        adapter.addFragment(SoughtItemFragment.newInstance("followees", u), getString(R.string.followees));
+        adapter.addFragment(QualificationFragment.newInstance(u), getString(R.string.qualifications));
         viewPager.setAdapter(adapter);
     }
 }

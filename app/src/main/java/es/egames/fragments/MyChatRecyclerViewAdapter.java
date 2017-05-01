@@ -11,17 +11,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import es.egames.R;
-import es.egames.activities.DetailsUserActivity;
-import es.egames.fragments.ChatFragment.OnListFragmentInteractionListener;
-import es.egames.fragments.dummy.DummyContent.DummyItem;
-import es.egames.model.User;
-import es.egames.utils.RestTemplateManager;
-
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+
+import es.egames.R;
+import es.egames.fragments.ChatFragment.OnListFragmentInteractionListener;
+import es.egames.model.User;
+import es.egames.utils.RestTemplateManager;
 
 public class MyChatRecyclerViewAdapter extends RecyclerView.Adapter<MyChatRecyclerViewAdapter.ViewHolder> {
 

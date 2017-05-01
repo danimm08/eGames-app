@@ -20,12 +20,11 @@ import es.egames.model.PersonalGame;
 
 public class MyExchangeRecyclerViewAdapter extends RecyclerView.Adapter<MyExchangeRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DetailsOfExchangeForm> mValues;
+    private List<DetailsOfExchangeForm> mValues;
     private Context context;
     private final OnListFragmentInteractionListener mListener;
 
-    public MyExchangeRecyclerViewAdapter(List<DetailsOfExchangeForm> items, OnListFragmentInteractionListener listener, Context context) {
-        mValues = items;
+    public MyExchangeRecyclerViewAdapter(OnListFragmentInteractionListener listener, Context context) {
         mListener = listener;
         this.context = context;
     }
@@ -119,5 +118,10 @@ public class MyExchangeRecyclerViewAdapter extends RecyclerView.Adapter<MyExchan
         public String toString() {
             return super.toString() + " '" + "'";
         }
+    }
+
+    public void setItems(List<DetailsOfExchangeForm> newMValues) {
+        this.mValues = newMValues;
+        notifyDataSetChanged();
     }
 }

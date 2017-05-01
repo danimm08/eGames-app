@@ -51,8 +51,7 @@ public class PersonalGameDetailsActivityFragment extends Fragment {
         mDistanceNumber = (TextView) view.findViewById(R.id.card_personalgame_distanceNumber);
 
         mUsername.setText(personalGame.getUser().getUserAccount().getUsername());
-        Double auxRating = (personalGame.getUser().getReputation() * 5) / 10;
-        Long rating = Math.round(auxRating);
+        Float rating = new Float(personalGame.getUser().getReputation());
         mRatingbar.setRating(rating);
         mDescription.setText(personalGame.getDescription());
         mType.setText(personalGame.getType().toString());

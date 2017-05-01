@@ -15,7 +15,7 @@ import java.util.List;
 
 public class MySoughtItemRecyclerViewAdapter extends RecyclerView.Adapter<MySoughtItemRecyclerViewAdapter.ViewHolder> {
 
-    private final List<SoughtItem> mValues;
+    private List<SoughtItem> mValues;
     private final OnListFragmentInteractionListener mListener;
 
     public MySoughtItemRecyclerViewAdapter(List<SoughtItem> items, OnListFragmentInteractionListener listener) {
@@ -58,6 +58,22 @@ public class MySoughtItemRecyclerViewAdapter extends RecyclerView.Adapter<MySoug
     @Override
     public int getItemCount() {
         return mValues.size();
+    }
+
+    public void setItems(List<SoughtItem> items) {
+        mValues = items;
+        notifyDataSetChanged();
+    }
+
+    public void addItem(SoughtItem item) {
+        mValues.add(item);
+        notifyDataSetChanged();
+    }
+
+    public void removeItem(SoughtItem item) {
+        int index = mValues.size() -1;
+        mValues.remove(item);
+        notifyItemRemoved(index);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

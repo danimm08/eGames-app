@@ -25,10 +25,11 @@ import es.egames.R;
 import es.egames.forms.DetailsOfExchangeForm;
 import es.egames.utils.RestTemplateManager;
 
-//TODO: OnBackToFragment, update data
 public class ExchangeFragment extends Fragment {
 
     private OnListFragmentInteractionListener mListener;
+    private MyExchangeRecyclerViewAdapter adapter;
+    private RecyclerView recyclerView;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -59,19 +60,26 @@ public class ExchangeFragment extends Fragment {
 
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+            recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
-
-            RequestForDetailsOfExchangeFormTask requestForDetailsOfExchangeFormTask = new RequestForDetailsOfExchangeFormTask();
-            List<DetailsOfExchangeForm> detailsOfExchangeForms;
-            try {
-                detailsOfExchangeForms = requestForDetailsOfExchangeFormTask.execute().get();
-            } catch (InterruptedException | ExecutionException e) {
-                detailsOfExchangeForms = new ArrayList<>();
-            }
-            recyclerView.setAdapter(new MyExchangeRecyclerViewAdapter(detailsOfExchangeForms, mListener, getContext()));
         }
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapter = new MyExchangeRecyclerViewAdapter(mListener, getContext());
+        recyclerView.setAdapter(adapter);
+
+        RequestForDetailsOfExchangeFormTask requestForDetailsOfExchangeFormTask = new RequestForDetailsOfExchangeFormTask();
+        List<DetailsOfExchangeForm> detailsOfExchangeForms;
+        try {
+            detailsOfExchangeForms = requestForDetailsOfExchangeFormTask.execute().get();
+        } catch (InterruptedException | ExecutionException e) {
+            detailsOfExchangeForms = new ArrayList<>();
+        }
+        adapter.setItems(detailsOfExchangeForms);
     }
 
     @Override
