@@ -1,6 +1,5 @@
 package es.egames.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,13 +18,11 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import es.egames.R;
-import es.egames.forms.RegistrationForm;
 import es.egames.forms.UserProfileForm;
 import es.egames.forms.UserUserAccountForm;
 import es.egames.model.Address;
@@ -105,14 +102,14 @@ public class ModifyPersonalData extends AppCompatActivity {
 
     }
 
-    public class RequestForModifyInfo extends AsyncTask<Object, Void, Map<String,Object>> {
+    public class RequestForModifyInfo extends AsyncTask<Object, Void, Map<String, Object>> {
 
         @Override
-        protected Map<String,Object> doInBackground(Object... params) {
+        protected Map<String, Object> doInBackground(Object... params) {
             Set<Integer> errors = new HashSet<>();
             UserProfileForm userProfileForm;
             UserUserAccountForm userUserAccountForm;
-            Map<String,Object> info = new HashMap<>();
+            Map<String, Object> info = new HashMap<>();
             Boolean flag = false;
 
             if (params[0] instanceof UserProfileForm) {
@@ -127,7 +124,7 @@ public class ModifyPersonalData extends AppCompatActivity {
                         errors.add(R.string.error_personaldata);
                     }
                 } catch (Exception e) {
-                    errors.add(R.string.error_general);
+                    errors.add(R.string.error_personaldata);
                 }
             }
             if (params[1] instanceof UserUserAccountForm) {
@@ -152,7 +149,8 @@ public class ModifyPersonalData extends AppCompatActivity {
                         }
                     }
                 } catch (Exception e) {
-                    errors.add(R.string.error_general);
+                    errors.add(R.string.error_userAccount);
+                    errors.add(R.string.error_userAccount_remmind);
                 }
             }
             info.put("errors", errors);
@@ -162,11 +160,19 @@ public class ModifyPersonalData extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Map<String, Object> info) {
-            Set<Integer> errors = (Set<Integer>) info.get("errors");
+            List<Integer> errors = new ArrayList<>((Set<Integer>) info.get("errors"));
             Boolean flag = (Boolean) info.get("flag");
             if (!errors.isEmpty()) {
-                //TODO: Reemplazar con errores verdaderos
-                Toast.makeText(getApplicationContext(), "Reemplazar con errores verdaderos", Toast.LENGTH_LONG).show();
+                String errorsAsString = "";
+                for (Integer i : errors) {
+                    String aux = getString(i);
+                    if (errors.indexOf(i) == 0) {
+                        errorsAsString += aux;
+                    } else {
+                        errorsAsString += ", " + aux;
+                    }
+                }
+                Toast.makeText(getApplicationContext(), errorsAsString, Toast.LENGTH_LONG).show();
             } else {
                 if (flag == false) {
                     Intent intent = new Intent(getApplicationContext(), DetailsUserActivity.class);
