@@ -165,6 +165,7 @@ public class ModifyPersonalData extends AppCompatActivity {
             Set<Integer> errors = (Set<Integer>) info.get("errors");
             Boolean flag = (Boolean) info.get("flag");
             if (!errors.isEmpty()) {
+                //TODO: Reemplazar con errores verdaderos
                 Toast.makeText(getApplicationContext(), "Reemplazar con errores verdaderos", Toast.LENGTH_LONG).show();
             } else {
                 if (flag == false) {

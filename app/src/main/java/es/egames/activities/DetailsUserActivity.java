@@ -3,8 +3,10 @@ package es.egames.activities;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,12 +17,20 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.JsonObject;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
+
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.concurrent.ExecutionException;
@@ -92,6 +102,16 @@ public class DetailsUserActivity extends AppCompatActivity implements SoughtItem
         } catch (InterruptedException | ExecutionException e) {
             userImage.setImageResource(R.drawable.default_image);
         }
+
+        userImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
+            }
+        });
 
         userName.setText(user.getName() + " " + user.getSurname());
         userUserName.setText(user.getUserAccount().getUsername());
@@ -178,6 +198,58 @@ public class DetailsUserActivity extends AppCompatActivity implements SoughtItem
             intent.putExtra("user", (User) item.getObject());
             startActivity(intent);
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        try {
+            if (requestCode == 1 && resultCode == RESULT_OK
+                    && null != data) {
+
+                if (data.getData() != null) {
+
+                    Uri uri = data.getData();
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                    File file = convertToFile(bitmap);
+
+                    String url = RestTemplateManager.getUrl(getApplicationContext(), "user/profile_picture");
+                    Ion.with(getApplicationContext())
+                            .load(url)
+                            .setHeader("Authorization", "Bearer " + RestTemplateManager.getToken(getApplicationContext()))
+                            .setMultipartFile("image", file).asJsonObject().setCallback(new FutureCallback<JsonObject>() {
+                        @Override
+                        public void onCompleted(Exception e, JsonObject result) {
+                            if (result == null) {
+                                Intent intent = new Intent(getApplicationContext(), DetailsUserActivity.class);
+                                intent.putExtra("user", user);
+                                finish();
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(getApplicationContext(), getString(R.string.error_upload_image), Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+                }
+            }
+        } catch (Exception oops) {
+            Toast.makeText(getApplicationContext(), getString(R.string.error_upload_image), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public File convertToFile(Bitmap bitmapToConvert) throws IOException {
+        File f = new File(getApplicationContext().getCacheDir(), user.getUserAccount().getUsername() + ".png");
+        f.createNewFile();
+
+        Bitmap bitmap = bitmapToConvert;
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
+        byte[] bitmapdata = bos.toByteArray();
+
+        FileOutputStream fos = new FileOutputStream(f);
+        fos.write(bitmapdata);
+        fos.flush();
+        fos.close();
+        return f;
     }
 
     public class RequestForUserDetailsTask extends AsyncTask<Void, Void, User> {
