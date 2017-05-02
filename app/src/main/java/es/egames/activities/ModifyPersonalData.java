@@ -141,12 +141,6 @@ public class ModifyPersonalData extends AppCompatActivity {
                     } else {
                         Map<String, Boolean> res = (Map<String, Boolean>) responseEntity.getBody();
                         flag = res.get("result");
-                        if (res.get("result")) {
-                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                            RestTemplateManager.logout(getApplicationContext());
-                            finish();
-                            startActivity(intent);
-                        }
                     }
                 } catch (Exception e) {
                     errors.add(R.string.error_userAccount);
@@ -180,6 +174,12 @@ public class ModifyPersonalData extends AppCompatActivity {
                     intent.putExtra("user", user);
                     finish();
                     startActivity(intent);
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    RestTemplateManager.logout(getApplicationContext());
+                    startActivity(intent);
+
                 }
             }
         }
