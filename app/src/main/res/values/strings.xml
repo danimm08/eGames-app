@@ -193,4 +193,5 @@
     <string name="error_personaldata">There was an error modifying your personal information</string>
     <string name="error_userAccount">An error occurred modifying your user account</string>
     <string name="error_userAccount_remmind">Remember that to change the account information, the current password is required</string>
+    <string name="error_invalid_number_of_games">You must select at least one game from each user</string>
 </resources>

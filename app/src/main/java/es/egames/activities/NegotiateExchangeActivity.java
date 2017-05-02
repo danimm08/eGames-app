@@ -157,8 +157,11 @@ public class NegotiateExchangeActivity extends AppCompatActivity {
         ExchangeForm exchangeForm = new ExchangeForm(personalGameUser1, personalGameUser2, type, wayExchange, note);
 
         RequestForExchange requestForExchange = new RequestForExchange();
-        requestForExchange.execute(exchangeForm);
-
+        if (personalGameUser1.size() > 0 && personalGameUser2.size() > 0) {
+            requestForExchange.execute(exchangeForm);
+        } else {
+            Toast.makeText(getApplicationContext(), R.string.error_invalid_number_of_games, Toast.LENGTH_LONG).show();
+        }
 
     }
 
