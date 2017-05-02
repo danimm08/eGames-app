@@ -48,6 +48,7 @@ public class ChatFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_chat_list, container, false);
+        getActivity().findViewById(R.id.tabs).setVisibility(View.GONE);
 
         if (view instanceof RecyclerView) {
             Context context = view.getContext();

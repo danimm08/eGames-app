@@ -33,8 +33,10 @@ public class GameTabsFragment extends android.support.v4.app.Fragment {
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewpager);
         setupViewPager(viewPager);
         // Set Tabs inside Toolbar
-        TabLayout tabs = (TabLayout) view.findViewById(R.id.tabs);
+        TabLayout tabs = (TabLayout) getActivity().findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
+
+        getActivity().findViewById(R.id.tabs).setVisibility(View.VISIBLE);
         return view;
     }
 
