@@ -278,6 +278,7 @@ public class LoginActivity extends AppCompatActivity {
             if (!hasErrors) {
                 if (access_token != null) {
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    finish();
                     startActivity(intent);
                 } else {
                     Toast toast = Toast.makeText(getApplicationContext(), R.string.error_invalid_credentials, Toast.LENGTH_LONG);

@@ -108,6 +108,9 @@ public class PersonalGameDetailsActivity extends AppCompatActivity implements Im
                 }
             });
         } else {
+            if(personalGame.getExchange()!=null){
+                fab.setVisibility(View.GONE);
+            }
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
