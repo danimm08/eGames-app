@@ -1,5 +1,6 @@
 package es.egames.fragments;
 
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import es.egames.R;
+import es.egames.activities.DetailsUserActivity;
 import es.egames.model.PersonalGame;
 
 /**
@@ -51,6 +53,14 @@ public class PersonalGameDetailsActivityFragment extends Fragment {
         mDistanceNumber = (TextView) view.findViewById(R.id.card_personalgame_distanceNumber);
 
         mUsername.setText(personalGame.getUser().getUserAccount().getUsername());
+        mUsername.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), DetailsUserActivity.class);
+                intent.putExtra("user", personalGame.getUser());
+                startActivity(intent);
+            }
+        });
         Float rating = new Float(personalGame.getUser().getReputation());
         mRatingbar.setRating(rating);
         mDescription.setText(personalGame.getDescription());

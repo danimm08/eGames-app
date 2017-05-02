@@ -92,4 +92,35 @@ public class SoughtItem {
     public void setObject(Object object) {
         this.object = object;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SoughtItem that = (SoughtItem) o;
+
+        if (image != null ? !image.equals(that.image) : that.image != null) return false;
+        if (filedOne != null ? !filedOne.equals(that.filedOne) : that.filedOne != null)
+            return false;
+        if (filedTwo != null ? !filedTwo.equals(that.filedTwo) : that.filedTwo != null)
+            return false;
+        if (filedThree != null ? !filedThree.equals(that.filedThree) : that.filedThree != null)
+            return false;
+        if (filedFour != null ? !filedFour.equals(that.filedFour) : that.filedFour != null)
+            return false;
+        return object != null ? object.equals(that.object) : that.object == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = image != null ? image.hashCode() : 0;
+        result = 31 * result + (filedOne != null ? filedOne.hashCode() : 0);
+        result = 31 * result + (filedTwo != null ? filedTwo.hashCode() : 0);
+        result = 31 * result + (filedThree != null ? filedThree.hashCode() : 0);
+        result = 31 * result + (filedFour != null ? filedFour.hashCode() : 0);
+        result = 31 * result + (object != null ? object.hashCode() : 0);
+        return result;
+    }
 }

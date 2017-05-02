@@ -51,7 +51,7 @@ public class SoughtItemFragment extends Fragment {
     private Object auxObject;
     private List<SoughtItem> items;
     private OnListFragmentInteractionListener mListener;
-    public static MySoughtItemRecyclerViewAdapter adapter;
+    public MySoughtItemRecyclerViewAdapter adapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the

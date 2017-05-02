@@ -27,6 +27,7 @@
             android:layout_marginTop="@dimen/md_keylines"
             android:ellipsize="end"
             android:singleLine="true"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/article_subheading" />
 
         <RatingBar
