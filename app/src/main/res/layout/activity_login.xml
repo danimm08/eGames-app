@@ -86,7 +86,7 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Do not have an account yet?"
+            android:text="@string/not_account_yet"
             android:textAlignment="center"
             android:textSize="24sp" />
 
@@ -94,6 +94,6 @@
             android:id="@+id/register_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Register now" />
+            android:text="@string/register_now" />
     </LinearLayout>
 </LinearLayout>

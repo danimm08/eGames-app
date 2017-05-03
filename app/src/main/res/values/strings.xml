@@ -1,197 +1,110 @@
 <resources>
     <string name="ip_server" translatable="false">http://192.168.1.40:8080/api/</string>
     <string name="app_name">eGames</string>
-    <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_login" translatable="false">Sign in</string>
 
     <!-- Strings related to login -->
-    <string name="prompt_username">Username</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_username">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
+    <string name="prompt_username">Nombre de usuario</string>
+    <string name="prompt_password">Contraseña</string>
+    <string name="action_sign_in">Iniciar sesión</string>
+    <string name="action_sign_in_short">Iniciar sesión</string>
+    <string name="error_invalid_username">La dirección de correo es inválida</string>
+    <string name="error_invalid_password">La contraseña es demasiado corta</string>
+    <string name="error_incorrect_password">Esta contraseña es incorrecta</string>
+    <string name="error_field_required">Este campo es requerido</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="preference_file_key">access_token</string>
-    <string name="error_invalid_credentials">Your username or password are wrong. Please, try again.</string>
-    <string name="title_activity_register">RegisterActivity</string>
-    <string name="large_text">
-        "Material is the metaphor.\n\n"
-
-        "A material metaphor is the unifying theory of a rationalized space and a system of motion."
-        "The material is grounded in tactile reality, inspired by the study of paper and ink, yet "
-        "technologically advanced and open to imagination and magic.\n"
-        "Surfaces and edges of the material provide visual cues that are grounded in reality. The "
-        "use of familiar tactile attributes helps users quickly understand affordances. Yet the "
-        "flexibility of the material creates new affordances that supercede those in the physical "
-        "world, without breaking the rules of physics.\n"
-        "The fundamentals of light, surface, and movement are key to conveying how objects move, "
-        "interact, and exist in space and in relation to each other. Realistic lighting shows "
-        "seams, divides space, and indicates moving parts.\n\n"
-
-        "Bold, graphic, intentional.\n\n"
-
-        "The foundational elements of print based design typography, grids, space, scale, color, "
-        "and use of imagery guide visual treatments. These elements do far more than please the "
-        "eye. They create hierarchy, meaning, and focus. Deliberate color choices, edge to edge "
-        "imagery, large scale typography, and intentional white space create a bold and graphic "
-        "interface that immerse the user in the experience.\n"
-        "An emphasis on user actions makes core functionality immediately apparent and provides "
-        "waypoints for the user.\n\n"
-
-        "Motion provides meaning.\n\n"
-
-        "Motion respects and reinforces the user as the prime mover. Primary user actions are "
-        "inflection points that initiate motion, transforming the whole design.\n"
-        "All action takes place in a single environment. Objects are presented to the user without "
-        "breaking the continuity of experience even as they transform and reorganize.\n"
-        "Motion is meaningful and appropriate, serving to focus attention and maintain continuity. "
-        "Feedback is subtle yet clear. Transitions are efﬁcient yet coherent.\n\n"
-
-        "3D world.\n\n"
-
-        "The material environment is a 3D space, which means all objects have x, y, and z "
-        "dimensions. The z-axis is perpendicularly aligned to the plane of the display, with the "
-        "positive z-axis extending towards the viewer. Every sheet of material occupies a single "
-        "position along the z-axis and has a standard 1dp thickness.\n"
-        "On the web, the z-axis is used for layering and not for perspective. The 3D world is "
-        "emulated by manipulating the y-axis.\n\n"
-
-        "Light and shadow.\n\n"
-
-        "Within the material environment, virtual lights illuminate the scene. Key lights create "
-        "directional shadows, while ambient light creates soft shadows from all angles.\n"
-        "Shadows in the material environment are cast by these two light sources. In Android "
-        "development, shadows occur when light sources are blocked by sheets of material at "
-        "various positions along the z-axis. On the web, shadows are depicted by manipulating the "
-        "y-axis only. The following example shows the card with a height of 6dp.\n\n"
-
-        "Resting elevation.\n\n"
-
-        "All material objects, regardless of size, have a resting elevation, or default elevation "
-        "that does not change. If an object changes elevation, it should return to its resting "
-        "elevation as soon as possible.\n\n"
-
-        "Component elevations.\n\n"
-
-        "The resting elevation for a component type is consistent across apps (e.g., FAB elevation "
-        "does not vary from 6dp in one app to 16dp in another app).\n"
-        "Components may have different resting elevations across platforms, depending on the depth "
-        "of the environment (e.g., TV has a greater depth than mobile or desktop).\n\n"
-
-        "Responsive elevation and dynamic elevation offsets.\n\n"
-
-        "Some component types have responsive elevation, meaning they change elevation in response "
-        "to user input (e.g., normal, focused, and pressed) or system events. These elevation "
-        "changes are consistently implemented using dynamic elevation offsets.\n"
-        "Dynamic elevation offsets are the goal elevation that a component moves towards, relative "
-        "to the component’s resting state. They ensure that elevation changes are consistent "
-        "across actions and component types. For example, all components that lift on press have "
-        "the same elevation change relative to their resting elevation.\n"
-        "Once the input event is completed or cancelled, the component will return to its resting "
-        "elevation.\n\n"
-
-        "Avoiding elevation interference.\n\n"
-
-        "Components with responsive elevations may encounter other components as they move between "
-        "their resting elevations and dynamic elevation offsets. Because material cannot pass "
-        "through other material, components avoid interfering with one another any number of ways, "
-        "whether on a per component basis or using the entire app layout.\n"
-        "On a component level, components can move or be removed before they cause interference. "
-        "For example, a floating action button (FAB) can disappear or move off screen before a "
-        "user picks up a card, or it can move if a snackbar appears.\n"
-        "On the layout level, design your app layout to minimize opportunities for interference. "
-        "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
-        "when a user tries to pick up one of cards.\n\n"
-    </string>
-    <string name="action_settings">Settings</string>
-    <string name="register">Register</string>
-    <string name="surname">Surname</string>
-    <string name="name">Name</string>
-    <string name="personal_data">Personal data</string>
-    <string name="address">Address</string>
-    <string name="street">Street</string>
-    <string name="city">City</string>
-    <string name="state">State</string>
-    <string name="country">Contry</string>
-    <string name="zip">Zip</string>
-    <string name="user_account">User Account</string>
+    <string name="preference_file_key" translatable="false">access_token</string>
+    <string name="error_invalid_credentials">Su nombre de usuario o contraseña son incorrectas. Por favor, inténtelo otra vez.</string>
+    <string name="title_activity_register" translatable="false">RegisterActivity</string>
+    <string name="action_settings">Opciones</string>
+    <string name="register">Registro</string>
+    <string name="surname">Apellidos</string>
+    <string name="name">Nombre</string>
+    <string name="personal_data">Datos personales</string>
+    <string name="address">Dirección</string>
+    <string name="street">Calle</string>
+    <string name="city">Ciudad</string>
+    <string name="state">Provincia</string>
+    <string name="country">País</string>
+    <string name="zip">Código postal</string>
+    <string name="user_account">Cuenta de usuario</string>
     <string name="email">Email</string>
-    <string name="error_registration">There was an error with your registry, plase check that the field are correct.</string>
-    <string name="error_general">An error has ocurred with the conection with the server</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="error_registration">Se produjo un error con su registro, por favor, comprueba que los campos son correctos</string>
+    <string name="error_general">Un error ha ocurrido con la conexión con el servidor</string>
+    <string name="title_activity_main" translatable="false">MainActivity</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nearby">Nearby</string>
-    <string name="recommended">Recommended</string>
-    <string name="followed">Followed</string>
-    <string name="games">Games</string>
-    <string name="title_activity_details_of_game">DetailsOfGameActivity</string>
-    <string name="title_activity_main2">Main2Activity</string>
-    <string name="num_exchanges">Nº of exchanges</string>
-    <string name="distance">Distance</string>
-    <string name="title_activity_personal_game_details">PersonalGameDetailsActivity</string>
-    <string name="make_exchange">Exchange</string>
-    <string name="title_activity_search">SearchActivity</string>
-    <string name="personal_games">Personal games</string>
-    <string name="users">Users</string>
-    <string name="ressults_of_search">Results for</string>
-    <string name="exchange_my_games">My games</string>
-    <string name="exchange_their_games">Their games</string>
-    <string name="exchange_other_information">Other information</string>
-    <string name="exchange_way_exchange">Way to exchange</string>
-    <string name="exchange_make_exchange">Make exchange</string>
-    <string name="exchange_note">Add a note</string>
-    <string name="title_activity_user_details">UserDetailsActivity</string>
-    <string name="followers">Followers</string>
-    <string name="followees">Followees</string>
-    <string name="exchanges">exchanges</string>
-    <string name="follow">Follow</string>
-    <string name="unfollow">Unfollow</string>
-    <string name="edit_info">Edit</string>
-    <string name="error_follow">An error has occurred following / following this user</string>
-    <string name="my_exchanges">My exchanges</string>
-    <string name="accepted">Accepted</string>
-    <string name="denied">Denied</string>
-    <string name="pending">Pending</string>
-    <string name="title_activity_exchange_details">ExchangeDetailsActivity</string>
-    <string name="create_on">Created on</string>
-    <string name="update_on">Update on</string>
-    <string name="attemps">attemps</string>
-    <string name="accept">Accept</string>
-    <string name="denny">Denny</string>
-    <string name="negotiate">Negotiate</string>
-    <string name="notes">Notes</string>
-    <string name="on">on</string>
-    <string name="details_exchange">Details of exchange</string>
-    <string name="qualify">Qualify</string>
-    <string name="exchange_negotiate_exchange">Negotiate exchange</string>
-    <string name="title_activity_qualify_exchange">QualifyExchange</string>
-    <string name="text">Text</string>
-    <string name="rating">Rating</string>
-    <string name="qualifications">Qualifications</string>
-    <string name="title_activity_create_personal_game">CreatePersonalGameActivity</string>
-    <string name="type">Type of desired exchange </string>
-    <string name="description">Description</string>
-    <string name="create_personal_game">Create personal game</string>
-    <string name="error_upload_image">An error has occurred. Make sure the image size is less than 5MB and the format is png or jpg</string>
-    <string name="logout">Logout</string>
-    <string name="my_profile">My profile</string>
+    <string name="navigation_drawer_open">Abrir menú de navegación</string>
+    <string name="navigation_drawer_close">Cerrar menú de navegación</string>
+    <string name="nearby">Cercanos</string>
+    <string name="recommended">Recomendados</string>
+    <string name="followed">Seguidos</string>
+    <string name="games">Juegos</string>
+    <string name="title_activity_details_of_game" translatable="false">DetailsOfGameActivity</string>
+    <string name="title_activity_main2" translatable="false">Main2Activity</string>
+    <string name="num_exchanges">Nº de intercambios</string>
+    <string name="distance">Distancia</string>
+    <string name="title_activity_personal_game_details" translatable="false">PersonalGameDetailsActivity</string>
+    <string name="make_exchange">Intercambio</string>
+    <string name="title_activity_search" translatable="false">SearchActivity</string>
+    <string name="personal_games">Juegos personales</string>
+    <string name="users">Usuarios</string>
+    <string name="ressults_of_search">Resultados para</string>
+    <string name="exchange_my_games">Mis juegos</string>
+    <string name="exchange_their_games">Sus juegos</string>
+    <string name="exchange_other_information">Otra información</string>
+    <string name="exchange_way_exchange">Forma de intercambio</string>
+    <string name="exchange_make_exchange">Realizar intercambio</string>
+    <string name="exchange_note">Añadir una nota</string>
+    <string name="title_activity_user_details" translatable="false">UserDetailsActivity</string>
+    <string name="followers">Seguidores</string>
+    <string name="followees">Seguidos</string>
+    <string name="exchanges">intercambios</string>
+    <string name="follow">Seguir</string>
+    <string name="unfollow">Dejar de seguir</string>
+    <string name="edit_info">Editar</string>
+    <string name="error_follow">Un error ha ocurrido siguiendo / dejando de seguir a este usuario</string>
+    <string name="my_exchanges">Mis intercambios</string>
+    <string name="accepted">Aceptado</string>
+    <string name="denied">Denegado</string>
+    <string name="pending">Pendiente</string>
+    <string name="title_activity_exchange_details" translatable="false">ExchangeDetailsActivity</string>
+    <string name="create_on">Creado el</string>
+    <string name="update_on">Actualizado el</string>
+    <string name="attemps">intentos</string>
+    <string name="accept">Aceptar</string>
+    <string name="denny">Denegar</string>
+    <string name="negotiate">Negociar</string>
+    <string name="notes">Notas</string>
+    <string name="on">el</string>
+    <string name="details_exchange">Detalles de intercambio</string>
+    <string name="qualify">Calificar</string>
+    <string name="exchange_negotiate_exchange">Negociar intercambio</string>
+    <string name="title_activity_qualify_exchange" translatable="false">QualifyExchange</string>
+    <string name="text">Texto</string>
+    <string name="rating">Puntuación</string>
+    <string name="qualifications">Calificaciones</string>
+    <string name="title_activity_create_personal_game" translatable="false">CreatePersonalGameActivity</string>
+    <string name="type">Tipo de intercambio deseado</string>
+    <string name="description">Descripción</string>
+    <string name="create_personal_game">Crear juego personal</string>
+    <string name="error_upload_image">Se produjo un error. Asegúrese de que la imagen pesa menos de 5MB, y tiene formato png o jpg</string>
+    <string name="logout">Cerrar sesión</string>
+    <string name="my_profile">Mi perfil</string>
     <string name="chats">Chats</string>
-    <string name="title_activity_chat">ChatActivity</string>
-    <string name="chat_with">Chat with</string>
-    <string name="title_activity_create_messge">CreateMessgeActivity</string>
-    <string name="send">Send</string>
-    <string name="message">Message</string>
-    <string name="send_message">Send a message</string>
-    <string name="current_password">Current password</string>
-    <string name="modify_info">Modify personal data</string>
-    <string name="error_personaldata">There was an error modifying your personal information</string>
-    <string name="error_userAccount">An error occurred modifying your user account</string>
-    <string name="error_userAccount_remmind">Remember that to change the account information, the current password is required</string>
-    <string name="error_invalid_number_of_games">You must select at least one game from each user</string>
+    <string name="title_activity_chat" translatable="false">ChatActivity</string>
+    <string name="chat_with">Chat con</string>
+    <string name="title_activity_create_messge" translatable="false">CreateMessgeActivity</string>
+    <string name="send">Enviar</string>
+    <string name="message">Mensaje</string>
+    <string name="send_message">Enviar un mensaje</string>
+    <string name="current_password">Contraseña actual</string>
+    <string name="modify_info">Modificar información personal</string>
+    <string name="error_personaldata">Se produjo un error modificando su información personal</string>
+    <string name="error_userAccount">Se produjo un error modificando la información de su cuenta</string>
+    <string name="error_userAccount_remmind">Recuerde que para cambiar la información de la cuenta, la contraseña actual es requerida</string>
+    <string name="error_invalid_number_of_games">Debe seleccionar al menos un juego de cada usuario</string>
+    <string name="not_account_yet">¿No tienes cuenta aún?</string>
+    <string name="register_now">Regístrese ahora</string>
 </resources>

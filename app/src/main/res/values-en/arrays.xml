@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="orderByElements">
+        <item>Reputation</item>
+        <item>Type</item>
+        <item>Followees</item>
+        <item>Distance</item>
+    </string-array>
+    <string-array name="type">
+        <item>Fixed</item>
+        <item>Temporary</item>
+    </string-array>
+</resources>
