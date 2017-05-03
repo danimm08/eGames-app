@@ -94,7 +94,8 @@ public class DetailsOfGameActivity extends AppCompatActivity implements DetailsO
     @Override
     public void onItemSelected(AdapterView<?> parent, View view,
                                int pos, long id) {
-        String option = parent.getItemAtPosition(pos).toString().toLowerCase();
+        String[] auxArray = getResources().getStringArray(R.array.auxOrderByElements);
+        String option = auxArray[pos].toString().toLowerCase();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frament_to_replace, DetailsOfGameActivityFragment.newInstance(option));
         transaction.commit();

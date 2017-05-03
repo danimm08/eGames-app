@@ -84,22 +84,22 @@ public class DetailsExchangeActivity extends AppCompatActivity {
         if (detailsOfExchangeForm.getStatus() == null) {
             mState.setText(R.string.pending);
             mState.setTextColor(getResources().getColor(R.color.holo_orange_dark));
-            mQualify.setVisibility(View.INVISIBLE);
+            mQualify.setVisibility(View.GONE);
         } else if (detailsOfExchangeForm.getStatus()) {
             mState.setText(R.string.accepted);
             mState.setTextColor(getResources().getColor(R.color.holo_green_dark));
-            mAccept.setVisibility(View.INVISIBLE);
-            mNegotiate.setVisibility(View.INVISIBLE);
-            mDenny.setVisibility(View.INVISIBLE);
+            mAccept.setVisibility(View.GONE);
+            mNegotiate.setVisibility(View.GONE);
+            mDenny.setVisibility(View.GONE);
             RequesForCheckIsAllowedToQualify requesForCheckIsAllowedToQualify = new RequesForCheckIsAllowedToQualify();
             requesForCheckIsAllowedToQualify.execute();
         } else if (detailsOfExchangeForm.getStatus() == false) {
             mState.setText(R.string.denied);
             mState.setTextColor(getResources().getColor(R.color.holo_red_dark));
-            mAccept.setVisibility(View.INVISIBLE);
-            mNegotiate.setVisibility(View.INVISIBLE);
-            mDenny.setVisibility(View.INVISIBLE);
-            mQualify.setVisibility(View.INVISIBLE);
+            mAccept.setVisibility(View.GONE);
+            mNegotiate.setVisibility(View.GONE);
+            mDenny.setVisibility(View.GONE);
+            mQualify.setVisibility(View.GONE);
         }
 
         if (detailsOfExchangeForm.getEventDate() != null) {
@@ -110,10 +110,16 @@ public class DetailsExchangeActivity extends AppCompatActivity {
         mUsername.setText(aux.get(0).getUser().getUserAccount().getUsername());
         mNum.setText(detailsOfExchangeForm.getNumberOfAttemps().toString());
         mType.setText(detailsOfExchangeForm.getType().toString());
-        mWayExchange.setText(detailsOfExchangeForm.getWayExchange());
+        if (detailsOfExchangeForm.getWayExchange() == null || detailsOfExchangeForm.getWayExchange().isEmpty()) {
+            mWayExchange.setVisibility(View.GONE);
+        } else {
+            mWayExchange.setText(detailsOfExchangeForm.getWayExchange());
+            mWayExchange.setVisibility(View.VISIBLE);
+        }
+
 
         if (detailsOfExchangeForm.getLastModifier().equals(principal)) {
-            mAccept.setVisibility(View.INVISIBLE);
+            mAccept.setVisibility(View.GONE);
         }
 
         final RequestForAcceptOrDenny requestForAcceptOrDenny = new RequestForAcceptOrDenny();
@@ -143,7 +149,7 @@ public class DetailsExchangeActivity extends AppCompatActivity {
         mQualify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),QualifyExchangeActivity.class);
+                Intent intent = new Intent(getApplicationContext(), QualifyExchangeActivity.class);
                 intent.putExtra("detailsOfExchangeForm", detailsOfExchangeForm);
                 startActivity(intent);
             }
@@ -230,16 +236,16 @@ public class DetailsExchangeActivity extends AppCompatActivity {
                 super.onPostExecute(aBoolean);
                 mState.setText(R.string.accepted);
                 mState.setTextColor(getResources().getColor(R.color.holo_green_dark));
-                mAccept.setVisibility(View.INVISIBLE);
-                mNegotiate.setVisibility(View.INVISIBLE);
-                mDenny.setVisibility(View.INVISIBLE);
+                mAccept.setVisibility(View.GONE);
+                mNegotiate.setVisibility(View.GONE);
+                mDenny.setVisibility(View.GONE);
                 mQualify.setVisibility(View.VISIBLE);
             } else if (!aBoolean) {
                 mState.setText(R.string.denied);
                 mState.setTextColor(getResources().getColor(R.color.holo_red_dark));
-                mAccept.setVisibility(View.INVISIBLE);
-                mNegotiate.setVisibility(View.INVISIBLE);
-                mDenny.setVisibility(View.INVISIBLE);
+                mAccept.setVisibility(View.GONE);
+                mNegotiate.setVisibility(View.GONE);
+                mDenny.setVisibility(View.GONE);
             }
         }
     }
@@ -275,7 +281,7 @@ public class DetailsExchangeActivity extends AppCompatActivity {
             if (aBoolean) {
                 mQualify.setVisibility(View.VISIBLE);
             } else {
-                mQualify.setVisibility(View.INVISIBLE);
+                mQualify.setVisibility(View.GONE);
             }
         }
     }

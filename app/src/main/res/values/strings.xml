@@ -32,7 +32,7 @@
     <string name="user_account">Cuenta de usuario</string>
     <string name="email">Email</string>
     <string name="error_registration">Se produjo un error con su registro, por favor, comprueba que los campos son correctos</string>
-    <string name="error_general">Un error ha ocurrido con la conexión con el servidor</string>
+    <string name="error_general">Se ha producido un error</string>
     <string name="title_activity_main" translatable="false">MainActivity</string>
 
     <string name="navigation_drawer_open">Abrir menú de navegación</string>

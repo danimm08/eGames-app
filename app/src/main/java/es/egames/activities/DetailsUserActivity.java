@@ -105,15 +105,17 @@ public class DetailsUserActivity extends AppCompatActivity implements SoughtItem
             userImage.setImageResource(R.drawable.default_image);
         }
 
-        userImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
-            }
-        });
+        if (principal.equals(user)) {
+            userImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.setType("image/*");
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
+                }
+            });
+        }
 
         userName.setText(user.getName() + " " + user.getSurname());
         userUserName.setText(user.getUserAccount().getUsername());

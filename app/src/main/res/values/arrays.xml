@@ -6,6 +6,12 @@
         <item>Seguidos</item>
         <item>Distancia</item>
     </string-array>
+    <string-array name="auxOrderByElements">
+        <item>Reputation</item>
+        <item>Type</item>
+        <item>Followees</item>
+        <item>Distance</item>
+    </string-array>
     <string-array name="type">
         <item>Fijo</item>
         <item>Temporal</item>
