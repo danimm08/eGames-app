@@ -101,7 +101,7 @@
                         android:layout_weight="1"
                         android:ems="10"
                         android:hint="@string/exchange_way_exchange"
-                        android:inputType="text" />
+                        android:inputType="textMultiLine" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -115,7 +115,7 @@
                         android:layout_weight="1"
                         android:ems="10"
                         android:hint="@string/exchange_note"
-                        android:inputType="textShortMessage" />
+                        android:inputType="textMultiLine" />
                 </android.support.design.widget.TextInputLayout>
 
 

@@ -134,6 +134,7 @@
                         android:ellipsize="end"
                         android:singleLine="true"
                         android:text="@string/update_on"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/article_subheading"
                         tools:text="danimoreno" />
 

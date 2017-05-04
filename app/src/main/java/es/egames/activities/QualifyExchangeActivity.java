@@ -95,7 +95,6 @@ public class QualifyExchangeActivity extends AppCompatActivity {
                 toast.show();
             } else {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                finish();
                 startActivityForResult(intent, 0);
             }
         }

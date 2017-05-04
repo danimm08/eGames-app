@@ -106,8 +106,16 @@ public class DetailsExchangeActivity extends AppCompatActivity {
             mEvent.setText(getString(R.string.on) + " " + dateFormat.format(detailsOfExchangeForm.getEventDate()));
         }
 
-        List<PersonalGame> aux = new ArrayList<>(detailsOfExchangeForm.getPersonalGameUser2());
+        final List<PersonalGame> aux = new ArrayList<>(detailsOfExchangeForm.getPersonalGameUser2());
         mUsername.setText(aux.get(0).getUser().getUserAccount().getUsername());
+        mUsername.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), DetailsUserActivity.class);
+                intent.putExtra("user", aux.get(0).getUser());
+                startActivity(intent);
+            }
+        });
         mNum.setText(detailsOfExchangeForm.getNumberOfAttemps().toString());
         mType.setText(detailsOfExchangeForm.getType().toString());
         if (detailsOfExchangeForm.getWayExchange() == null || detailsOfExchangeForm.getWayExchange().isEmpty()) {
