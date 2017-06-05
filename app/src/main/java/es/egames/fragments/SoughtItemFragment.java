@@ -77,10 +77,9 @@ public class SoughtItemFragment extends Fragment {
 
         if (getArguments() != null) {
             mode = getArguments().getString(MODE);
-            auxObject = getArguments().getString(AUXOBJECT);
-            if (auxObject == null) {
-                auxObject = getArguments().getSerializable(AUXOBJECT);
-            }
+
+            auxObject = getArguments().getSerializable(AUXOBJECT);
+
         }
 
         RequestForSearchTask task = new RequestForSearchTask();
