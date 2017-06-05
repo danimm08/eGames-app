@@ -1,4 +1,4 @@
-package es.egames.fragments;
+package es.egames.adapters;
 
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;

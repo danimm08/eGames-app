@@ -13,8 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.gms.plus.model.people.Person;
-
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -22,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import es.egames.R;
+import es.egames.adapters.MySoughtItemRecyclerViewAdapter;
 import es.egames.forms.SoughtItem;
 import es.egames.model.Game;
 import es.egames.model.PersonalGame;

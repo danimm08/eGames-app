@@ -1,14 +1,12 @@
 package es.egames.activities;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -16,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.plus.model.people.Person;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
@@ -31,20 +28,15 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import es.egames.R;
 import es.egames.forms.GameDetailsForm;
 import es.egames.fragments.ImagePersonalGameFragment;
-import es.egames.fragments.MyGameDetailsFormRecyclerViewAdapter;
+import es.egames.adapters.MyGameDetailsFormRecyclerViewAdapter;
 import es.egames.model.PersonalGame;
 import es.egames.model.User;
 import es.egames.utils.RestTemplateManager;
-
-import static java.security.AccessController.getContext;
 
 public class PersonalGameDetailsActivity extends AppCompatActivity implements ImagePersonalGameFragment.OnListFragmentInteractionListener {
 

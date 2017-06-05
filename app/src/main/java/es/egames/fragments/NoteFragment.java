@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.egames.R;
+import es.egames.adapters.MyNoteRecyclerViewAdapter;
 import es.egames.model.Note;
 
 public class NoteFragment extends Fragment {

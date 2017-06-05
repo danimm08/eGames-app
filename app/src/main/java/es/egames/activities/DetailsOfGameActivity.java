@@ -14,14 +14,11 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.util.concurrent.ExecutionException;
-
 import es.egames.R;
 import es.egames.forms.GameDetailsForm;
 import es.egames.fragments.DetailsOfGameActivityFragment;
-import es.egames.fragments.MyGameDetailsFormRecyclerViewAdapter;
+import es.egames.adapters.MyGameDetailsFormRecyclerViewAdapter;
 import es.egames.model.PersonalGame;
-import es.egames.model.User;
 
 public class DetailsOfGameActivity extends AppCompatActivity implements DetailsOfGameActivityFragment.OnListFragmentInteractionListener, AdapterView.OnItemSelectedListener {
 

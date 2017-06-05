@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import es.egames.R;
+import es.egames.adapters.MyQualificationRecyclerViewAdapter;
 import es.egames.model.Qualification;
 import es.egames.model.User;
 import es.egames.utils.RestTemplateManager;

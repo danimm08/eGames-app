@@ -1,8 +1,6 @@
 package es.egames.fragments;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,12 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import es.egames.R;
+import es.egames.adapters.MyGameDetailsFormRecyclerViewAdapter;
+import es.egames.adapters.MySoughtItemRecyclerViewAdapter;
 import es.egames.forms.SoughtItem;
 import es.egames.model.PersonalGame;
 

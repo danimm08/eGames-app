@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import es.egames.R;
+import es.egames.adapters.MyChatRecyclerViewAdapter;
 import es.egames.model.User;
 import es.egames.utils.RestTemplateManager;
 

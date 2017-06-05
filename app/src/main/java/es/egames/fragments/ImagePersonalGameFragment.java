@@ -13,14 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
-
-import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -28,6 +20,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import es.egames.R;
+import es.egames.adapters.MyImageRecyclerViewAdapter;
 import es.egames.model.Image;
 import es.egames.model.PersonalGame;
 import es.egames.utils.RestTemplateManager;
